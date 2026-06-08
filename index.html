@@ -68,7 +68,8 @@ label input{
 }
 </style>
 </head>
-<body style="display:none;">
+<body>
+<div id="conteudo" style="display:none;">
 
 <script>
 async function gerarHash(texto){
@@ -123,8 +124,8 @@ if(!acesso){
 
 }
 
-document.body.style.display =
-    "block";
+document.getElementById("conteudo")
+    .style.display = "block";
 
 })();
 </script>
