@@ -110,6 +110,7 @@ const acesso =
     dados.usuarios.find(u=>
 
         u.usuario === usuario &&
+        u.nome === nome &&
         u.hash === hash &&
         u.ativo
 
@@ -132,7 +133,7 @@ document.getElementById("conteudo")
 console.log("Título antes:", document.title);
 
 document.title =
-    "UBS " + usuario;
+    "UBS " + nome;
 
 console.log("Título depois:", document.title);
 
@@ -143,7 +144,7 @@ console.log("H1 encontrado:", h1);
 
 if(h1){
     h1.textContent =
-        "APS Assistente UBS " + usuario;
+        "APS Assistente UBS " + nome;
 }
 })();
 </script>
