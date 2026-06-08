@@ -17,6 +17,18 @@
       "nome": "Administrador",
       "hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
       "ativo": true
+    }, 
+    {
+      "usuario": "lucas",    
+      "nome": "Lucas Almeida",
+      "hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+      "ativo": true
+    }, 
+    {
+      "usuario": "julia",    
+      "nome": "Julia",
+      "hash": "d277670919a94ba361be1887d39852c3f31d7eed817343cbb70fcd8910841f86",
+      "ativo": true
     }
 
   ]
