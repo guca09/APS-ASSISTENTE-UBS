@@ -124,17 +124,27 @@ if(!acesso){
 
 }
 
+console.log("Usuario:", usuario);
+
 document.getElementById("conteudo")
     .style.display = "block";
+
+console.log("Título antes:", document.title);
 
 document.title =
     "UBS " + usuario;
 
-document.getElementById("tituloPrincipal")
-    .textContent =
-    "APS Assistente UBS " + usuario;
+console.log("Título depois:", document.title);
 
-console.log("Logado:", usuario);
+const h1 =
+    document.getElementById("tituloPrincipal");
+
+console.log("H1 encontrado:", h1);
+
+if(h1){
+    h1.textContent =
+        "APS Assistente UBS " + usuario;
+}
 })();
 </script>
 <!-- ========================================================================================================================= -->
