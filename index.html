@@ -128,8 +128,18 @@ document.getElementById("conteudo")
     .style.display = "block";
  
 console.log("Logado:", usuario);
-document.title =
-    "UBS " + usuario;
+function g(x){
+    return document.getElementById(x);
+}
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.title =
+        "UBS " + usuario;
+
+    g('tituloPrincipal').textContent =
+        "APS Assistente UBS " + usuario;
+
+});
 })();
 </script>
 <!-- ========================================================================================================================= -->
