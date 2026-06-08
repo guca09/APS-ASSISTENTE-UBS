@@ -86,13 +86,18 @@ async function gerarHash(texto){
         .join("");
 
 }
+
 (async function(){
 
 const usuario =
-    prompt("Usuário");
+    prompt("Usuário:");
+
+if(!usuario) return;
 
 const senha =
-    prompt("Senha");
+    prompt("Senha:");
+
+if(!senha) return;
 
 const hash =
     await gerarHash(senha);
@@ -119,11 +124,10 @@ if(!acesso){
 
 }
 
-document.getElementById("conteudo")
-    .style.display = "block";
+document.body.style.display =
+    "block";
 
 })();
-
 </script>
 <!-- ========================================================================================================================= -->
 <!--                                                                Inputs                                                     -->
