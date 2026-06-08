@@ -1,0 +1,20 @@
+{
+  "usuarios": [
+    {
+      "usuario": "jackeline",
+      "hash": "50997241377971261e3f51eefa232ce2e20dec41ddb43837e823ea7e81ec704d",
+      "ativo": true
+    },
+    {
+      "usuario": "camielucas",
+      "hash": "fee4018acb72566733322ea38ccf39669531f5af7a7998cad1910377fc39e73b",
+      "ativo": true
+    }, 
+    {
+      "usuario": "admin",
+      "hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+      "ativo": true
+    },
+
+  ]
+}
