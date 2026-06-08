@@ -29,6 +29,18 @@
       "nome": "Giulia diCaterina",
       "hash": "e4c2eed8a6df0147265631e9ff25b70fd0e4b3a246896695b089584bf3ce8b90",
       "ativo": true
+    }, 
+    {
+      "usuario": "clara",    
+      "nome": "Clara Tiossi",
+      "hash": "7814459b3f23f455e4e9bea9c80508ef91609ef4f42818f1167836583bee3c6d",
+      "ativo": true
+    }, 
+    {
+      "usuario": "beatriz",    
+      "nome": "Beatriz Balbino",
+      "hash": "7cadbe72fe5e07be29f4c76dfb4d99f4c6a9a78212e730d5933937c0cb8419ba",
+      "ativo": true
     }
 
   ]
