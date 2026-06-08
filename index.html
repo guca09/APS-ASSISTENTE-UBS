@@ -126,20 +126,15 @@ if(!acesso){
 
 document.getElementById("conteudo")
     .style.display = "block";
- 
+
+document.title =
+    "UBS " + usuario;
+
+document.getElementById("tituloPrincipal")
+    .textContent =
+    "APS Assistente UBS " + usuario;
+
 console.log("Logado:", usuario);
-function g(x){
-    return document.getElementById(x);
-}
-document.addEventListener("DOMContentLoaded", () => {
-
-    document.title =
-        "UBS " + usuario;
-
-    g('tituloPrincipal').textContent =
-        "APS Assistente UBS " + usuario;
-
-});
 })();
 </script>
 <!-- ========================================================================================================================= -->
