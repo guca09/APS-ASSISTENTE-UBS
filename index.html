@@ -12,7 +12,8 @@ body{font-family:Arial;margin:20px;max-width:1400px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
 .card{border:1px solid #000000;border-radius:8px;padding:12px;margin:15px 0}
 input,select{width:90%;padding:6px}
-textarea{width:100%;height:320px}
+textarea{width:100%;height:100px}
+.textareaGG{width:100%;height:320px}
 button{padding:20px 100px}
 pre{white-space:pre-wrap}
 label{
@@ -167,7 +168,7 @@ if(h1){
 🤰 Pré-natal
 </button>
 
-</div>
+</div></div>
 <!--________________________________________________________________ADULTO________________________________________________________________________ -->
 <div id="adulto" style="display:block">
 <div class="card">
@@ -293,8 +294,14 @@ História familiar de diabetes
 <div class="card"><h2>Resultado</h2><pre id="r"></pre></div>
 
 <div class="card">
-<textarea id="soap"></textarea>
-<button onclick="navigator.clipboard.writeText(document.getElementById('soap').value)">Copiar SOAP</button>
+<!--<textarea id="soaps"></textarea>
+<button onclick="navigator.clipboard.writeText(document.getElementById('soaps').value)">Copiar S</button>-
+<br><br>--><textarea id="soapo"></textarea>
+<button onclick="navigator.clipboard.writeText(document.getElementById('soapo').value)">Copiar O</button>
+<br><br><textarea id="soapa"></textarea>
+<button onclick="navigator.clipboard.writeText(document.getElementById('soapa').value)">Copiar A</button>
+<br><br><textarea id="soapp"></textarea>
+<button onclick="navigator.clipboard.writeText(document.getElementById('soapp').value)">Copiar P</button>
 </div>
 <button onclick="limparFormulario()">Limpar tudo</button>
 
@@ -832,6 +839,13 @@ antebraços quando deitado de barriga para baixo</label>
 
 <div class="condicoes">
 
+<label>Aleitamento<select id="aleitamento">
+<option value=""></option>
+<option value="Alexclus">Aleitamento Materno Exclusivo</option>
+<option value="Alecform">Aleitamento Materno complementado com Formula</option>
+</select>
+</label>
+
 <label><input type="checkbox" id="alimentacaoAdequada">
 Alimentação adequada para idade
 </label>
@@ -854,6 +868,10 @@ Ingesta hídrica adequada
 <div class="condicoes">
 <label><input type="checkbox" id="vacinasDia">
 Vacinas em dia
+</label>
+
+<label><input type="checkbox" id="vacinasREC">
+Recusa vacinal
 </label>
 
 <label><input type="checkbox" id="reacaoVacina">
@@ -900,7 +918,7 @@ Avaliar Puericultura
 <div class="card">
 <h3>SOAP Puericultura</h3>
 
-<textarea id="soapPueri"></textarea>
+<textarea class="textareaGG" id="soapPueri"></textarea>
 
 <button onclick="
 navigator.clipboard.writeText(
@@ -1988,98 +2006,92 @@ g('r').textContent = txt;
 // GERAÇÃO DO SOAP
 // -----------------------------------------------------
 
-let soap = `O:
-Paciente ${sexo.toLowerCase()}, ${idade} anos.`;
+let soapo = `Paciente ${sexo.toLowerCase()}, ${idade} anos.`;
 
-if (sexo == "Masculino"){soap += `\nBom estado geral, corado, hidratado, anictérico, acianótico, orientado em tempo e espaço`;}
-else {soap += `\nBom estado geral, corada, hidratada, anictérica, acianótica, orientada em tempo e espaço`;}
-soap += `\n- Ausculta cardíaca: bulhas normofonéticas em 2 tempos, sem sopros, rítmicas, regulares
+if (sexo == "Masculino"){soapo += `\nBom estado geral, corado, hidratado, anictérico, acianótico, orientado em tempo e espaço`;}
+else {soapo += `\nBom estado geral, corada, hidratada, anictérica, acianótica, orientada em tempo e espaço`;}
+soapo += `\n- Ausculta cardíaca: bulhas normofonéticas em 2 tempos, sem sopros, rítmicas, regulares
 - Ausculta pulmonar: murmúrio vesicular presente bilateralmente, sem ruídos adventícios
 Pressão arterial ${pas}x${pad} mmHg.`;
 
 
 if (statusHAS) {
-    soap += `\nHipertensão arterial ${statusHAS.toLowerCase()}.`;
+    soapo += `\nHipertensão arterial ${statusHAS.toLowerCase()}.`;
 }
 
 if (statusHAS === "Tratada" && metaHAS) {
-    soap += `\n${metaHAS}`;
+    soapo += `\n${metaHAS}`;
 }
 
-soap += `\nIMC ${imc.toFixed(1)} (${obesidade}).`;
+soapo += `\nIMC ${imc.toFixed(1)} (${obesidade}).`;
 
 if (temDislipidemia) {
-    soap += `\nLDL ${ldl} mg/dL. 
+    soapo += `\nLDL ${ldl} mg/dL. 
 Triglicerídeos ${tg} mg/dL.`;
 }
 if(glicJejum){
-    soap += `\nGlicemia de jejum: ${glicJejum} mg/dL.`;
+    soapo += `\nGlicemia de jejum: ${glicJejum} mg/dL.`;
 }
 
 if(hba1c){
-    soap += `\nHbA1c: ${hba1c}%.`;
+    soapo += `\nHbA1c: ${hba1c}%.`;
 }
 
-soap += `
-
-A:
-${obesidade}.
+let soapa = `${obesidade}.
 ${cat}.`;
 
 if (statusHAS === "Tratada" && metaHAS) {
-    soap += `\n${metaHAS}`;
+    soapa += `\n${metaHAS}`;
 }
 
-soap += `
+soapa += `
 Estratificação cardiovascular: ${riscoHAS}.`;
 
 if (temDislipidemia) {
-    soap += `\nDislipidemia. Risco cardiovascular ${riscoLip}.
+    soapa += `\nDislipidemia. Risco cardiovascular ${riscoLip}.
 Meta LDL < ${meta}.`;
 }
 
 if(temDM){
-soap += `
+soapa += `
 Diabetes mellitus.
 Meta HbA1c: ${
         idade < 60 ? "<7,0%" : "<7,5%"
     }.
 Meta glicemia de jejum: 80-130 mg/dL.`;}
 
-soap += `\nRisco para diabetes tipo 2 pelo FINDRISC: ${findrisc.risco} (${findrisc.score} pontos).`;
+soapa += `\nRisco para diabetes tipo 2 pelo FINDRISC: ${findrisc.risco} (${findrisc.score} pontos).`;
 
-soap += `
-
-P:`;
-
-soap += `
-Orientações gerais:
+let soapp = `Orientações gerais:
 - Alimentação equilibrada
 - Atividade física 150 min/semana
 - Redução do estresse
 - ${imc >= 30 ? "Perda de pelo menos 5% do peso" : "Perda de 3 a 7% do peso"} ${g('tab').checked ? "\n- Cessar tabagismo" : ""}`;
 
 if(temDM){
-    soap += `\n${tratamentoMedicDM}Orientadas medidas não farmacológicas para diabetes mellitus.`;
+    soapp += `\n${tratamentoMedicDM}Orientadas medidas não farmacológicas para diabetes mellitus.`;
 }
 
 if (planoHAS) {
-    soap += `\n${planoHAS}`;
+    soapp += `\n${planoHAS}`;
 }
 
 if (cat==="Hipertensão estágio 1" || cat==="Hipertensão estágio 2" || cat==="Hipertensão estágio 3") {
-    soap += `${anti.join("\n")}`;
+    soapp += `${anti.join("\n")}`;
 }
 
 if (temDislipidemia && planoLip) {
-    soap += `\n${planoLip}.`;
+    soapp += `\n${planoLip}.`;
 }
 
-soap += `\nRastreamentos indicados: ${rast.join(", ")}.`;
+soapp += `\nRastreamentos indicados: ${rast.join(", ")}.`;
 
-soap += `\nRetorno para seguimento ambulatorial.`;
+soapp += `\nRetorno para seguimento ambulatorial.`;
 
-g('soap').value = soap;}
+//g('soaps').value = soaps;
+g('soapo').value = soapo;
+g('soapa').value = soapa;
+g('soapp').value = soapp;}
 // =============================================================================================================================
 //                                                        PUERICULTURA
 // =============================================================================================================================
@@ -2838,12 +2850,30 @@ const zpc = calcZpc();
 const pesoPueri = +g('pesoPueri').value;
 const alturaPueri = +g('alturaPueri').value;
 const pc = +g('pc').value;
+const aleitamento = +g('aleitamento').value;
 
 let resultadoHabitos = [];
 
 if(g('vacinasDia').checked){
     resultadoHabitos.push(
         "Vacinação adequada para idade."
+    );
+}
+
+if(g('vacinasREC').checked){
+    resultadoHabitos.push(
+        "Recusa vacinal."
+    );
+}
+
+if(g('aleitamento').value === 'Alexclus'){
+    resultadoHabitos.push(
+        "Aleitamento Materno exclusivo."
+    );
+}
+else if(g('aleitamento').value === 'Alecform'){
+    resultadoHabitos.push(
+        "Aleitamento Materno complementado com formula."
     );
 }
 
@@ -2866,6 +2896,17 @@ if(g('creche').checked){
 }
 
 let soapHabitos = [];
+
+if(g('aleitamento').value === 'Alexclus'){
+    soapHabitos.push(
+        "Aleitamento Materno exclusivo."
+    );
+}
+else if(g('aleitamento').value === 'Alecform'){
+    soapHabitos.push(
+        "Aleitamento Materno complementado com formula."
+    );
+}
 
 if(
     g('alimentacaoAdequada').checked &&
@@ -2899,6 +2940,12 @@ soapHabitos.push(
 "As vacinas estão em dia, sem histórico de reações adversas."
 );
 
+}
+
+if(g('vacinasREC').checked){
+    soapHabitos.push(
+        "Recusa vacinal."
+    );
 }
 
 if(g('creche').checked){
@@ -2940,16 +2987,17 @@ if(faltantes.length === 0){
 Puericultura ${idadeAtual.replace('m','')} meses. Peso: ${pesoPueri} kg. Altura: ${alturaPueri} cm. Perímetro Cefálico: ${pc} cm.
 
 A:
-Desenvolvimento neuropsicomotor adequado para a idade.
-
-P:
-Orientações de puericultura realizadas.
-Retorno conforme calendário de acompanhamento.
-${soapHabitos.join(" ")}
 ${classificaZ(zPeso)}
 ${classificaZalt(zaltura)}
 ${classificaZimc(zimc)}
-${classificaZpc(zpc)}`;
+${classificaZpc(zpc)}
+${soapHabitos.join(" ")}
+Desenvolvimento neuropsicomotor adequado para a idade.
+
+
+P:
+Orientações de puericultura realizadas.
+Retorno conforme calendário de acompanhamento.`;
 
 }else{
 
@@ -2961,6 +3009,12 @@ ${classificaZpc(zpc)}`;
 Puericultura ${idadeAtual.replace('m','')} meses. Peso: ${pesoPueri} kg. Altura: ${alturaPueri} cm. Perímetro Cefálico: ${pc} cm.
 
 A:
+${classificaZ(zPeso)}
+${classificaZalt(zaltura)}
+${classificaZimc(zimc)}
+${classificaZpc(zpc)}
+${soapHabitos.join(" ")}
+
 Possíveis sinais de atraso do desenvolvimento.
 
 Marcos ausentes:
@@ -2968,12 +3022,7 @@ ${faltantes.join("\n")}
 
 P:
 Reavaliar desenvolvimento.
-Considerar acompanhamento especializado se persistência dos achados.
-${soapHabitos.join(" ")}
-${classificaZ(zPeso)}
-${classificaZalt(zaltura)}
-${classificaZimc(zimc)}
-${classificaZpc(zpc)}`;
+Considerar acompanhamento especializado se persistência dos achados.`;
 }
 
 if(zPeso !== null){
