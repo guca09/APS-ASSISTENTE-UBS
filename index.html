@@ -54,7 +54,7 @@ label input{
 
 .condipu{
     display:grid;
-    grid-template-columns:repeat(1, 1fr);
+    grid-template-columns:repeat(2, 1fr);
     gap:4px 20px;
 }
 
@@ -294,9 +294,10 @@ História familiar de diabetes
 <div class="card"><h2>Resultado</h2><pre id="r"></pre></div>
 
 <div class="card">
-<!--<textarea id="soaps"></textarea>
-<button onclick="navigator.clipboard.writeText(document.getElementById('soaps').value)">Copiar S</button>-
-<br><br>--><textarea id="soapo"></textarea>
+<h3>SOAP</h3>
+<textarea id="soaps"></textarea>
+<button onclick="navigator.clipboard.writeText(document.getElementById('soaps').value)">Copiar S</button>
+<br><br><textarea id="soapo"></textarea>
 <button onclick="navigator.clipboard.writeText(document.getElementById('soapo').value)">Copiar O</button>
 <br><br><textarea id="soapa"></textarea>
 <button onclick="navigator.clipboard.writeText(document.getElementById('soapa').value)">Copiar A</button>
@@ -324,7 +325,7 @@ História familiar de diabetes
 
 <div class="card">
 
-<h2>Puericultura</h2>
+<h2>Puericultura</h2><h3>Dados Gerais</h3>
 
 <div class="grid">
     
@@ -344,6 +345,8 @@ Idade (meses)
 </select></div>
 <div>Estatura (cm)<input id="alturaPueri" type="number"></div>
 <div>Perímetro cefálico (cm)<input id="pc" type="number"></div>
+<div>Polpas digitais na fontanela <input id="polpas" type="number"></div>
+<label><input type="checkbox" id="erudent">Presença de erupção dentaria</label>
 
 </div>
 </div>
@@ -841,14 +844,17 @@ antebraços quando deitado de barriga para baixo</label>
 
 <label>Aleitamento<select id="aleitamento">
 <option value=""></option>
+<option value="Ale">Aleitamento Materno</option>
+<option value="Alesoform">Aleitamento apenas com fórmula</option>
 <option value="Alexclus">Aleitamento Materno Exclusivo</option>
-<option value="Alecform">Aleitamento Materno complementado com Formula</option>
+<option value="Alecform">Aleitamento Materno complementado com fórmula</option>
 </select>
 </label>
 
-<label><input type="checkbox" id="alimentacaoAdequada">
-Alimentação adequada para idade
-</label>
+<label><input type="checkbox" id="frutpapa">Frutas (amassadas ou raspadas) e primeira papa principal de múltiplas misturas</label>
+<label><input type="checkbox" id="papadupla">Duas papa principais de misturas múltiplas</label>
+<label><input type="checkbox" id="introref">Introduzindo a refeição da família com ajuste de consistência</label>
+<label><input type="checkbox" id="comidafam">Comida da família, observando a adequação dos alimentos</label>
 
 <label><input type="checkbox" id="todosGrupos">
 Consome todos os grupos alimentares
@@ -905,6 +911,26 @@ Boa relação familiar
 </label>
 </div>
 </div>
+
+<div class="card">
+    <h3>Rotina da Criança</h3>
+    <div>Sono<select id="sonoPueri">
+<option value="sonotranqui">Tranquilo</option>
+<option value="sonoagi">Agitado</option>
+<option value="sonomamar">Acorda para mamar</option>
+</select></div>
+    <h5>Eliminações fisiológicas:</h5>
+    <div class="condicoes">
+<label><input type="checkbox" id="diudia">Diurese diária</label>
+<label><input type="checkbox" id="evaade">Evacuação adequada</label>
+<label><input type="checkbox" id="consitpação">Constipação</label>
+</div>
+<h5>Suplementação:</h5>
+<div class="condicoes">
+<label><input type="checkbox" id="aditil">Aditil</label>
+<label><input type="checkbox" id="Sulfafer">Sulfato Ferroso</label>
+</div>
+</div>
 <button onclick="avaliarPuericultura()">
 Avaliar Puericultura
 </button>
@@ -917,15 +943,15 @@ Avaliar Puericultura
 
 <div class="card">
 <h3>SOAP Puericultura</h3>
+<textarea id="soapPueriS"></textarea>
+<button onclick="navigator.clipboard.writeText(g('soapPueriS').value)">Copiar S</button>
+<br><br><textarea id="soapPueriO"></textarea>
+<button onclick="navigator.clipboard.writeText(g('soapPueriO').value)">Copiar O</button>
+<br><br><textarea id="soapPueriA"></textarea>
+<button onclick="navigator.clipboard.writeText(g('soapPueriA').value)">Copiar A</button>
+<br><br><textarea id="soapPueriP"></textarea>
+<button onclick="navigator.clipboard.writeText(g('soapPueriP').value)">Copiar P</button>
 
-<textarea class="textareaGG" id="soapPueri"></textarea>
-
-<button onclick="
-navigator.clipboard.writeText(
-g('soapPueri').value
-)">
-Copiar SOAP
-</button>
 </div>
 <button onclick="limparFormulario()">Limpar tudo</button>
 <!--_____________________________________________________________PRE-NATAL____________________________________________________________________ -->
@@ -1574,6 +1600,7 @@ if(modelo === "uacr" || modelo === "full"){
 
 function calc(){
 
+
 const idade=+g('idade').value||0;
 const sexo=g('sexo').value;
 const peso=+g('peso').value||0;
@@ -1606,6 +1633,8 @@ if(idade>=50&&idade<=75) rast.push("Câncer colorretal");
 if(idade>=50&&idade<=80&&(+g('anosmaco').value>=20)&&(g('tab').checked||(+g('parou').value<=15))) rast.push("Câncer de pulmão");
 if(idade>=65&&idade<=85&&g('fumou').checked) rast.push("Aneurisma de aorta abdominal");
 if((sexo=="Feminino"&&idade>=65)||(sexo=="Masculino"&&idade>=70)) rast.push("Osteoporose");
+if(g('dm').checked) rast.push("Neuropatia diabética com monofilamento, Doença renal por RAC");
+
 
 // -----------------------------------------------------
 // HIPERTENSÃO
@@ -1618,6 +1647,8 @@ else if(pas<160&&pad<100) cat="Hipertensão estágio 1";
 else if(pas<180&&pad<110) cat="Hipertensão estágio 2";
 else cat="Hipertensão estágio 3";
 
+if(cat == "Hipertensão estágio 1"||cat == "Hipertensão estágio 2"||cat == "Hipertensão estágio 3") rast.push("Doença renal com proteina de 24h");
+
 let fr=0;
 if(g('tab').checked) fr++;
 if(g('dlp').checked) fr++;
@@ -1625,29 +1656,6 @@ if(g('dm').checked) fr++;
 if(imc>=30) fr++;
 if((sexo=="Masculino"&&idade>55)||(sexo=="Feminino"&&idade>65)) fr++;
 
-let riscoHAS="normal";
-const dcv=g('dac').checked||g('avc').checked;
-
-if(dcv || (g('drc').checked && idade>0)){
- riscoHAS="Risco muito alto";
-}else if(g('loa').checked || g('dm').checked || g('drc').checked){
- riscoHAS=(cat=="Hipertensão estágio 3")?"Risco muito alto":"Risco alto";
-}else{
- if(cat=="Pré-hipertensão"){
-   riscoHAS=(fr>=3)?"Risco moderado":"Risco baixo";
- }
- if(cat=="Hipertensão estágio 1"){
-   if(fr==0) riscoHAS="Risco baixo";
-   else if(fr<=2) riscoHAS="Risco moderado";
-   else riscoHAS="Risco alto";
- }
- if(cat=="Hipertensão estágio 2"){
-   riscoHAS=(fr==0)?"Risco moderado":"Risco alto";
- }
- if(cat=="Hipertensão estágio 3"){
-   riscoHAS="Risco alto";
- }
-}
 
 const statusHAS = g('statusHAS').value;
 let planoHAS = "";
@@ -1716,19 +1724,19 @@ if(g('anabol').checked) hasSec.push("Possível causa medicamentosa/hormonal");
 
 let antiu=[];
 if(g('usaDIU').checked){
- antiu.push("Usando diurético");
+ antiu.push("Usando diurético\n");
 }
 
 if(g('usaBCC').checked){
- antiu.push("Usando bloqueador de canal de cálcio");
+ antiu.push("Usando bloqueador de canal de cálcio\n");
 }
 
 if(g('usaIECA_BRA').checked){
- antiu.push("Usando IECA ou BRA");
+ antiu.push("Usando IECA ou BRA\n");
 }
 
 if(g('usaBB').checked){
- antiu.push("Usando beta-bloqueador");
+ antiu.push("Usando beta-bloqueador\n");
 }
 
 let anti=[];
@@ -1746,7 +1754,10 @@ if(g('icfer').checked){
 
 const ldl = +g('ldl').value || 0;
 const tg = +g('tg').value || 0;
-
+const hdl = +g('hdl').value || 0;
+const uacr = +g('uacr').value || 0;
+const egfr = +g('egfr').value || 0;
+const colTotal = +g('colTotal').value || 0;
 const prevent = calcPrevent10y();
 
 if(!isNaN(prevent)){
@@ -1778,7 +1789,7 @@ let meta = "";
 let planoLip = "";
 
 if(temDislipidemia){
-
+const dcv=g('dac').checked||g('avc').checked;
     // =====================================================
     // RISCO MUITO ALTO
     // =====================================================
@@ -1840,7 +1851,38 @@ if(temDislipidemia){
     }
 
 }
+// -----------------------------------------------------
+// COMORBIDADES
+// -----------------------------------------------------
 
+let comorbidades = [];
+
+if(g('dac').checked)
+    comorbidades.push("Doença arterial coronariana");
+
+if(g('avc').checked)
+    comorbidades.push("AVC/AIT");
+
+if(g('drc').checked)
+    comorbidades.push("Doença renal crônica");
+
+if(g('loa').checked)
+    comorbidades.push("Lesão de órgão-alvo");
+
+if(g('hipocalemia').checked)
+    comorbidades.push("Hipocalemia");
+
+if(g('icfer').checked)
+    comorbidades.push("Insuficiência cardíaca com fração de ejeção reduzida");
+
+if(g('gota').checked)
+    comorbidades.push("Gota");
+
+if(g('aterosub').checked)
+    comorbidades.push("Aterosclerose subclinica")
+
+if(g('ateromai').checked)
+    comorbidades.push("Aterosclerose >50%")
 // -----------------------------------------------------
 // DIABETES MELLITUS
 // -----------------------------------------------------
@@ -1952,7 +1994,7 @@ ${rast.join(", ")}
 
 HIPERTENSÃO:
 ${cat}
-Estratificação: ${riscoHAS}`;
+Estratificação: ${riscoLip}`;
 
 if (temDislipidemia) {
     txt += `
@@ -1965,7 +2007,7 @@ Tratamento: ${planoLip}`;
 txt += `
 
 ANTI-HIPERTENSIVOS:
-${planoHAS}${antiu.join("\n")}
+${planoHAS}${antiu.join("")}
 ${anti.join("\n")}
 
 PREVENT 10 anos:
@@ -2005,7 +2047,17 @@ g('r').textContent = txt;
 // -----------------------------------------------------
 // GERAÇÃO DO SOAP
 // -----------------------------------------------------
+const statusEST = g('statusEST').value;
+const anosmaco = g('anosmaco').value;
+const parou = g('parou').value;
 
+
+//-------------------------------------------------SOAP SSSSSSSSSSS------------------------------------------------------
+let soaps = `${antiu.join("")}Usa estatina: ${statusEST}. `;if (g('tab').checked) { soaps += `Tabagista. Com carga de "${anosmaco}" maço-ano. `} ;
+if (g('fumou').checked) {soaps+= `Fumou há ${parou} anos. `}; if(g('anabol').checked){soaps+= `Usa anabolizantes ou hormônios. `}; if(g('dmSintomatico').checked){soaps+= `Diabetes sintomático`};
+
+
+//-------------------------------------------------SOAP OOOOOOOOOOO------------------------------------------------------
 let soapo = `Paciente ${sexo.toLowerCase()}, ${idade} anos.`;
 
 if (sexo == "Masculino"){soapo += `\nBom estado geral, corado, hidratado, anictérico, acianótico, orientado em tempo e espaço`;}
@@ -2014,21 +2066,6 @@ soapo += `\n- Ausculta cardíaca: bulhas normofonéticas em 2 tempos, sem sopros
 - Ausculta pulmonar: murmúrio vesicular presente bilateralmente, sem ruídos adventícios
 Pressão arterial ${pas}x${pad} mmHg.`;
 
-
-if (statusHAS) {
-    soapo += `\nHipertensão arterial ${statusHAS.toLowerCase()}.`;
-}
-
-if (statusHAS === "Tratada" && metaHAS) {
-    soapo += `\n${metaHAS}`;
-}
-
-soapo += `\nIMC ${imc.toFixed(1)} (${obesidade}).`;
-
-if (temDislipidemia) {
-    soapo += `\nLDL ${ldl} mg/dL. 
-Triglicerídeos ${tg} mg/dL.`;
-}
 if(glicJejum){
     soapo += `\nGlicemia de jejum: ${glicJejum} mg/dL.`;
 }
@@ -2037,43 +2074,59 @@ if(hba1c){
     soapo += `\nHbA1c: ${hba1c}%.`;
 }
 
+if (totg) {
+    soapo += `\nTOTG: ${totg} mg/dL.`;
+}
+
+if (glicAcaso) {soapo += `\nGlicemia ao acaso: ${glicAcaso} mg/dL.`}
+
+if (ldl) soapo += `\nLDL ${ldl} mg/dL. `
+if (hdl) soapo+= `\nHDL ${hdl} mg/dL.`
+if (colTotal) soapo += `\nColesterol total ${colTotal} mg/dL.`
+if (tg) soapo += `\nTriglicerídeos ${tg} mg/dL.`;
+
+if (egfr) {    soapo += `\nTFG: ${egfr} mg/g.`;}
+if (uacr) {    soapo += `\nUACR: ${uacr} mg/g.`;}
+
+soapo += `\nIMC ${imc.toFixed(1)}.`;
+//-------------------------------------------------SOAP AAAAAAAAAAA------------------------------------------------------
 let soapa = `${obesidade}.
 ${cat}.`;
 
-if (statusHAS === "Tratada" && metaHAS) {
-    soapa += `\n${metaHAS}`;
+if (statusHAS) {soapa += `\nHipertensão arterial ${statusHAS.toLowerCase()}.`;}
+if (statusHAS === "Tratada" && metaHAS) {soapa += `\n${metaHAS}`;}
+if (metaHAS === "Pressão arterial fora da meta terapêutica."){soapa += `\nPAS <= 130 e PAD <= 90`}
+
+soapa += `\nScore PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado"}`
+if (temDislipidemia) {soapa += `\nDislipidemia. Risco cardiovascular ${riscoLip}.`}
+if (temDislipidemia && ldl>meta) {soapa += `\nFora da meta de ldl \nMeta LDL < ${meta}.`} ;
+if (temDislipidemia && ldl<=meta) {soapa +=`\nDentro da meta de ldl`}
+
+soapa += `\nRisco para diabetes tipo 2 pelo FINDRISC: ${findrisc.risco} (${findrisc.score} pontos). `
+if(temDM){soapa += `\nDiabetes mellitus.`
+if(glicJejum>130 || ((idade < 60 && hba1c > 7)||(idade>=60 && hba1c >7.5))) {soapa += `\nFora da meta de HbA1c e/ou glicemia de jejum
+Meta HbA1c: ${idade < 60 ? "<7,0%" : "<7,5%"}.
+Meta glicemia de jejum: 80-130 mg/dL.;}`}
+if ((glicJejum<=130 && ((idade < 60 && hba1c <= 7)||(idade>=60 && hba1c <= 7.5)))){ soapa += `\nDentro da meta de HbA1c e glicemia de jejum`}
 }
 
-soapa += `
-Estratificação cardiovascular: ${riscoHAS}.`;
-
-if (temDislipidemia) {
-    soapa += `\nDislipidemia. Risco cardiovascular ${riscoLip}.
-Meta LDL < ${meta}.`;
+if(comorbidades.length){soapa += `\nCondições associadas:`;
+    comorbidades.forEach(c=>{
+        soapa += `\n- ${c}`;
+    });
 }
 
-if(temDM){
-soapa += `
-Diabetes mellitus.
-Meta HbA1c: ${
-        idade < 60 ? "<7,0%" : "<7,5%"
-    }.
-Meta glicemia de jejum: 80-130 mg/dL.`;}
-
-soapa += `\nRisco para diabetes tipo 2 pelo FINDRISC: ${findrisc.risco} (${findrisc.score} pontos).`;
-
+//-------------------------------------------------SOAP PPPPPPPPPPP------------------------------------------------------
 let soapp = `Orientações gerais:
-- Alimentação equilibrada
-- Atividade física 150 min/semana
-- Redução do estresse
-- ${imc >= 30 ? "Perda de pelo menos 5% do peso" : "Perda de 3 a 7% do peso"} ${g('tab').checked ? "\n- Cessar tabagismo" : ""}`;
+- Oriento MEV (alimentação equilibrada, atv física 150min/semana)
+- ${imc >= 30 ? "Oriento perda de 5% do peso nos próximos 6 meses " : "Oriento perda de 3 a 7% do peso nos próximos 6 meses "} ${g('tab').checked ? "\n- Oriento sobre cessação do tabagismo e sua importância para quadro clínico" : ""}`;
 
 if(temDM){
-    soapp += `\n${tratamentoMedicDM}Orientadas medidas não farmacológicas para diabetes mellitus.`;
+    soapp += `\n- ${tratamentoMedicDM ? "Introduzo "+tratamentoMedicDM +"- ":""}Orientadas medidas não farmacológicas para diabetes mellitus.`;
 }
 
 if (planoHAS) {
-    soapp += `\n${planoHAS}`;
+    soapp += `\n- ${planoHAS}`;
 }
 
 if (cat==="Hipertensão estágio 1" || cat==="Hipertensão estágio 2" || cat==="Hipertensão estágio 3") {
@@ -2081,21 +2134,23 @@ if (cat==="Hipertensão estágio 1" || cat==="Hipertensão estágio 2" || cat===
 }
 
 if (temDislipidemia && planoLip) {
-    soapp += `\n${planoLip}.`;
+    soapp += `\n- Introduzo o uso de ${planoLip}.`;
 }
+
+if (g('dac').checked||g('avc').checked) soapp+=`\n- Introduzo o uso de AAS`;
 
 soapp += `\nRastreamentos indicados: ${rast.join(", ")}.`;
 
 soapp += `\nRetorno para seguimento ambulatorial.`;
 
-//g('soaps').value = soaps;
+g('soaps').value = soaps;
 g('soapo').value = soapo;
 g('soapa').value = soapa;
 g('soapp').value = soapp;}
+
 // =============================================================================================================================
 //                                                        PUERICULTURA
 // =============================================================================================================================
-
 
 function avaliarPuericultura(){
 
@@ -2842,7 +2897,10 @@ function classificaZpc(zpc){
 
 
 let texto = "";
-let soap = "";
+let soaps = "";
+let soapo = "";
+let soapa = "";
+let soapp = "";
 const zPeso = calcZPeso();
 const zaltura = calcZaltura();
 const zimc = calcZimc();
@@ -2877,7 +2935,18 @@ else if(g('aleitamento').value === 'Alecform'){
     );
 }
 
-if(g('alimentacaoAdequada').checked){
+{alimentacaoAdequada = false}
+
+if((idade < 6 && (g('aleitamento').value == 'Alexclus'||g('aleitamento').value == 'Alecform'||g('aleitamento').value == 'Alesoform'))||
+(idade === 6 && g('aleitamento').value === 'Ale' && g('frutpapa').checked)||
+(idade >= 7 &&idade <= 8 && g('aleitamento').value === 'Ale' && g('papadupla').checked)||
+(idade >= 9 && idade <= 11 && g('aleitamento').value === 'Ale' && g('introref').checked)||
+(idade >= 12 && idade < 24 && g('aleitamento').value === 'Ale' && g('comidafam').checked)||
+(idade >= 24 && g('aleitamento').value === ''))
+{alimentacaoAdequada = true;}
+
+
+if(alimentacaoAdequada){
     resultadoHabitos.push(
         "Alimentação adequada para faixa etária."
     );
@@ -2897,19 +2966,54 @@ if(g('creche').checked){
 
 let soapHabitos = [];
 
-if(g('aleitamento').value === 'Alexclus'){
-    soapHabitos.push(
-        "Aleitamento Materno exclusivo."
-    );
+let soapAlimentacao = "";
+
+if(g('aleitamento').value === "Ale"){
+    soapAlimentacao +=
+    "Mantém aleitamento materno. ";
 }
-else if(g('aleitamento').value === 'Alecform'){
-    soapHabitos.push(
-        "Aleitamento Materno complementado com formula."
-    );
+if(g('aleitamento').value === 'Alexclus'){
+    soapAlimentacao += 
+        "Aleitamento Materno exclusivo.";
+}
+if(g('aleitamento').value === 'Alecform'){
+    soapAlimentacao += 
+        "Aleitamento Materno complementado com formula.";
+}
+if(g('aleitamento').value === 'Alesoform'){
+    soapAlimentacao += 
+        "Aleitamento apenas com formula.";
+}
+if(g('frutpapa').checked){
+    soapAlimentacao +=
+    "Introdução alimentar iniciada com frutas amassadas ou raspadas e primeira refeição principal de múltiplas misturas. ";
+}
+if(g('papadupla').checked){
+    soapAlimentacao +=
+    "Recebe segunda refeição principal de múltiplas misturas. ";
+}
+if(g('introref').checked){
+    soapAlimentacao +=
+    "Em transição para alimentação da família. ";
+}
+if(g('comidafam').checked){
+    soapAlimentacao +=
+    "Recebe alimentação da família, observando variedade e adequação dos alimentos. ";
 }
 
+let soapRotina = [
+    g('sonoPueri').value === 'sonotranqui' ? "Sono tranquilo." : "",
+    g('sonoPueri').value === 'sonoagi' ? "Sono agitado." : "",
+    g('sonoPueri').value === 'sonomamar' ? "Acorda para mamar durante a noite." : "",
+    g('diudia').checked ? "Diurese diária preservada." : "",
+    g('evaade').checked ? "Evacuações adequadas." : "",
+    g('consitpação').checked ? "Constipação." : "",
+    g('aditil').checked ? "Em uso de Aditil." : "",
+    g('Sulfafer').checked ? "Em uso de sulfato ferroso." : ""
+].filter(Boolean).join(" ");
+
 if(
-    g('alimentacaoAdequada').checked &&
+    alimentacaoAdequada &&
     g('todosGrupos').checked
 ){
 
@@ -2917,7 +3021,7 @@ soapHabitos.push(
 "Apresenta alimentação diversificada, incluindo todos os grupos alimentares, sem restrições, com refeições em horários regulares."
 );
 
-}else if( g('alimentacaoAdequada').checked &&
+}else if( alimentacaoAdequada &&
 !g('todosGrupos').checked)
 {soapHabitos.push(
 "Apresenta alimentação diversificada, com refeições em horários regulares."
@@ -2977,53 +3081,51 @@ soapHabitos.push(
 );
 
 }
+//-------------------------------------------------SOAP SSSSSSSSSSS------------------------------------------------------
+soaps = `${soapAlimentacao}`;
+soaps += `${soapRotina}`;
+
+//-------------------------------------------------SOAP OOOOOOOOOOO e AAAAAAAAAAAA ------------------------------------------------------
+const polpas = +g('polpas').value || 0;
+soapo = `Puericultura ${idadeAtual.replace('m','')} meses. Peso: ${pesoPueri} kg. Altura: ${alturaPueri} cm. Perímetro Cefálico: ${pc} cm. IMC: ${(pesoPueri/(alturaPueri*alturaPueri)).toFixed(1)}. `
+if (idade<24) soapo += `Fontanela normotensa, de ${polpas} polpas digitais, sem abaulamento.`
+soapo += `Ausencia de linfonodos palpaveis.
+Orofaringe sem hiperemia, ${g('erudent').checked ? "presença de erupção dentaria" : "ausencia de erupção dentaria"}.
+- Ausculta cardíaca: bulhas normofonéticas em 2 tempos, sem sopros, rítmicas, regulares.
+- Ausculta pulmonar: murmúrio vesicular presente bilateralmente, sem ruídos adventícios.
+- Abdominal: ruidos hidroaéreos presentes, sem visceromegalias palpáveis.
+Genitalias pervias, testiculo palpavel em bolsa escrotal, fimose fisiologica (ou nao)
+Extremidades simetricas, com tonus preservado.`
 
 if(faltantes.length === 0){
 
     texto = resultadoHabitos.join(' ') +
     "\nDesenvolvimento adequado para a idade.";
 
-    soap = `O:
-Puericultura ${idadeAtual.replace('m','')} meses. Peso: ${pesoPueri} kg. Altura: ${alturaPueri} cm. Perímetro Cefálico: ${pc} cm.
-
-A:
-${classificaZ(zPeso)}
-${classificaZalt(zaltura)}
-${classificaZimc(zimc)}
-${classificaZpc(zpc)}
-${soapHabitos.join(" ")}
-Desenvolvimento neuropsicomotor adequado para a idade.
-
-
-P:
-Orientações de puericultura realizadas.
-Retorno conforme calendário de acompanhamento.`;
-
+    
+    soapa = `Desenvolvimento neuropsicomotor adequado para a idade.`;
 }else{
 
     texto = resultadoHabitos.join(' ') +
     "\nMarcos não atingidos:\n\n" +
     faltantes.join("\n");
 
-    soap = `O:
-Puericultura ${idadeAtual.replace('m','')} meses. Peso: ${pesoPueri} kg. Altura: ${alturaPueri} cm. Perímetro Cefálico: ${pc} cm.
+    soapo += `\nMarcos ausentes:
+${faltantes.join("\n")}`
+    soapa = `Possíveis sinais de atraso do desenvolvimento.`
+};
 
-A:
-${classificaZ(zPeso)}
+soapa += `\n${classificaZ(zPeso)}
 ${classificaZalt(zaltura)}
 ${classificaZimc(zimc)}
 ${classificaZpc(zpc)}
-${soapHabitos.join(" ")}
+${soapHabitos.join(" ")}`
 
-Possíveis sinais de atraso do desenvolvimento.
 
-Marcos ausentes:
-${faltantes.join("\n")}
+if (alimentacaoAdequada) {soapa += `\nAlimentação adequada para a faixa etária.`}else {soapa +=`\nAlimentação possivelmente inadequada para a faixa etária, necessitando reforço de orientações alimentares. `}
 
-P:
-Reavaliar desenvolvimento.
-Considerar acompanhamento especializado se persistência dos achados.`;
-}
+soapp = `Reavaliar desenvolvimento.
+Considerar acompanhamento especializado se persistência dos achados.`
 
 if(zPeso !== null){
 
@@ -3069,12 +3171,15 @@ ${classificaZpc(zpc)}`;
 g('resultadoPueri').textContent =
     texto;
 
-g('soapPueri').value =
-    soap;
-
+g('soapPueriS').value =
+    soaps;
+g('soapPueriA').value =
+    soapa;
+g('soapPueriO').value =
+    soapo;
+g('soapPueriP').value =
+    soapp;
 }
-
-
 
 // =============================================================================================================================
 //                                                        EVENTOS AUTOMÁTICOS
@@ -3091,24 +3196,9 @@ function atualizaPrevent(){
     }
     }
 }
-[
- 'idade',
- 'sexo',
- 'peso',
- 'altura',
- 'pas',
- 'colTotal',
- 'hdl',
- 'egfr',
- 'statusHAS',
- 'statusEST',
- 'dm',
- 'tab'
-].forEach(id => {
-
+[ 'idade', 'sexo', 'peso', 'altura', 'pas', 'colTotal', 'hdl', 'egfr', 'statusHAS', 'statusEST', 'dm', 'tab'].forEach(id => {
     g(id).addEventListener('input', atualizaPrevent);
     g(id).addEventListener('change', atualizaPrevent);
-
 });
 g('statusHAS').addEventListener('change', atualizarHAS);
 
@@ -3151,9 +3241,14 @@ function limparFormulario(){
     if(g('resultadoPueri'))
         g('resultadoPueri').textContent='';
 
-    if(g('soapPueri'))
-        g('soapPueri').value='';
-
+    if(g('soapPueriS'))
+        g('soapPueriS').value='';
+    if(g('soapPueriO'))
+        g('soapPueriO').value='';
+    if(g('soapPueriA'))
+        g('soapPueriA').value='';
+    if(g('soapPueriP'))
+        g('soapPueriP').value='';
 }
 
 function atualizaPuericultura(){
