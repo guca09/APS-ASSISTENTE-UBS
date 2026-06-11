@@ -3,69 +3,156 @@
 <!--                                                                formato pagina                                             -->
 <!-- ========================================================================================================================= -->
  <html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UBS JACKELINE</title>
+<head><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width,initial-scale=1"> 
+    <title>UBS JACKELINE</title> 
+    <body class="container-fluid py-3">
 <style>
-body{font-family:Arial;margin:20px;max-width:1400px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.card{border:1px solid #000000;border-radius:8px;padding:12px;margin:15px 0}
-input,select{width:90%;padding:6px}
-textarea{width:100%;height:100px}
-.textareaGG{width:100%;height:320px}
-button{padding:20px 100px}
-pre{white-space:pre-wrap}
-label{
-    display:inline-block;
-    margin:4px 12px 4px 0;
+body{
+    max-width:1600px;
+    margin:auto;
+    background:#f8f9fa;
 }
-label input{
-    margin-left:6px;
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    font-weight:700;
+}
+
+.card{
+    border:none;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    margin-bottom:15px;
+    padding:15px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+
+.grid > div{
+    display:flex;
+    flex-direction:column;
+}
+
+.grid label{
+    display:flex;
+    flex-direction:column;
+}
+
+input,
+select{
+    width:90%;padding:6px;
+}
+textarea{width:100%;height:160px;}
+
+input[type="checkbox"]{
+    width:auto;
+}
+
+.form-control,
+.form-select{
+    border-radius:8px;
+}
+
+button{
+    border-radius:8px !important;padding:20px 100px 20px;
 }
 
 .menuPrincipal{
     display:grid;
-    grid-template-columns:repeat(3, 1fr);
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
     gap:10px;
+    margin-bottom:15px;
 }
 
 .menuPrincipal button{
     width:100%;
-    padding:15px;
+    min-height:60px;
     font-size:16px;
+    font-weight:600;
 }
 
-.condicoes{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:4px 20px;
-}
-
-.condicoes label{
-    display:flex;
-    align-items:center;
-    gap:6px;
-}
-
-.condicoes input[type="checkbox"]{
-    width:auto;
-}
-
+.condicoes,
 .condipu{
     display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:4px 20px;
+    grid-template-columns:
+        repeat(2,1fr);
+    gap:8px 20px;
 }
 
+.condicoes label,
 .condipu label{
     display:flex;
     align-items:center;
-    gap:6px;
+    gap:8px;
+    margin:0;
 }
 
-.condipu input[type="checkbox"]{
-    width:auto;
+pre{
+    white-space:pre-wrap;
+    font-size:14px;
+    line-height:1.5;
+    margin:0;
+}
+
+textarea{
+    min-height:220px;
+}
+
+.textareaGG{
+    min-height:500px;
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+}
+
+h2{
+    margin-bottom:15px;
+    border-bottom:2px solid #dee2e6;
+    padding-bottom:5px;
+}
+
+h3{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+h4{
+    margin-top:15px;
+    margin-bottom:8px;
+    color:#495057;
+}
+
+#usuarioLogado{
+    position:fixed;
+    top:10px;
+    right:20px;
+    background:white;
+    padding:8px 12px;
+    border-radius:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+    font-size:14px;
+    font-weight:600;
+    z-index:9999;
+}
+
+.resultadoCard{
+    background:#ffffff;
+    border-left:5px solid #0d6efd;
+}
+
+.soapCard{
+    background:#ffffff;
+    border-left:5px solid #198754;
 }
 </style>
 </head>
@@ -156,17 +243,17 @@ if(h1){
 
 <div class="menuPrincipal">
 
-<button onclick="mostrarModulo('adulto')">
-👨 Adulto
-</button>
 
-<button onclick="mostrarModulo('puericultura')">
-👶 Puericultura
-</button>
+<div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+  <label class="btn btn-outline-info" onclick="mostrarModulo('adulto')" for="btnradio1">👨 Adulto</label>
 
-<button onclick="mostrarModulo('prenatal')">
-🤰 Pré-natal
-</button>
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+  <label class="btn btn-outline-info" onclick="mostrarModulo('puericultura')" for="btnradio2">👶 Puericultura</label>
+
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+  <label class="btn btn-outline-info" onclick="mostrarModulo('prenatal')" for="btnradio3">🤰 Pré-natal</label>
+</div>
 
 </div>
 <!--________________________________________________________________ADULTO________________________________________________________________________ -->
@@ -175,19 +262,28 @@ if(h1){
 <h2>Dados Gerais</h2>
 
 <div class="grid">
-<div>Idade<input id="idade" type="number"></div>
-<div>Sexo<select id="sexo"><option>Masculino</option><option>Feminino</option></select></div>
-<div>Peso<input id="peso" type="number"></div>
-<div>Altura (m)<input id="altura" type="number" step="0.01"></div>
-<div>Circunferência abdominal<input id="ca" type="number"></div>
-<div>Parou de fumar há quantos anos<input id="parou" type="number" value="0"></div>
-<div>Anos-maço<input id="anosmaco" type="number"></div>
+<div>Idade<input id="idade" type="number" class="form-control"></div>
+<div>Sexo<select id="sexo" class="form-select" aria-label="Default select example"><option>Masculino</option><option>Feminino</option></select></div>
+<div>Peso<input id="peso" type="number" class="form-control"></div>
+<div>Altura (m)<input id="altura" type="number" class="form-control" step="0.01"></div>
+<div>Circunferência abdominal<input id="ca" type="number" class="form-control"></div>
+<div>Parou de fumar há quantos anos<input id="parou" type="number" class="form-control" value="0"></div>
+<div>Anos-maço<input id="anosmaco" type="number" class="form-control"></div>
 </div>
 
 <div class="condicoes">
-<label><input type="checkbox" id="tab">Tabagismo</label>
-<label><input type="checkbox" id="fumou">Já fumou</label>
-<label><input type="checkbox" id="anabol">Uso de anabolizantes/hormônios</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="tab">
+<label class="form-check-label" for="tab">Tabagismo</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="fumou">
+<label class="form-check-label" for="fumou">Já fumou</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="anabol">
+<label class="form-check-label" for="anabol">Uso de anabolizantes/hormônios</label>
+</div>
 </div>
 </div>
 
@@ -195,11 +291,11 @@ if(h1){
 <h2>Hipertensão e Cardiovascular</h2>
 
 <div class="grid">
-<div>PAS<input id="pas" type="number"></div>
-<div>PAD<input id="pad" type="number"></div>
+<div>PAS<input id="pas" type="number" class="form-control"></div>
+<div>PAD<input id="pad" type="number" class="form-control"></div>
 
 <label>Situação da hipertensão
-<select id="statusHAS">
+<select id="statusHAS" class="form-select" aria-label="Default select example">
 <option value="">Sem informação</option>
 <option value="Tratada">Tratada</option>
 <option value="Não Tratada">Não tratada</option>
@@ -208,22 +304,55 @@ if(h1){
 </div>
 
 <div class="condicoes">
-<label><input type="checkbox" id="dac">Doença arterial coronariana</label>
-<label><input type="checkbox" id="avc">AVC/AIT</label>
-<label><input type="checkbox" id="drc">Doença renal crônica</label>
-<label><input type="checkbox" id="loa">Lesão de órgão-alvo</label>
-<label><input type="checkbox" id="hipocalemia">Hipocalemia</label>
-<label><input type="checkbox" id="icfer">Insuficiência cardíaca com fração reduzida</label>
-<label><input type="checkbox" id="gota">Gota</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="dac">
+<label class="form-check-label" for="dac">Doença arterial coronariana</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="avc">
+<label class="form-check-label" for="avc">AVC/AIT</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="drc">
+<label class="form-check-label" for="drc">Doença renal crônica</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="loa">
+<label class="form-check-label" for="loa">Lesão de órgão-alvo</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="hipocalemia">
+<label class="form-check-label" for="hipocalemia">Hipocalemia</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="icfer">
+<label class="form-check-label" for="icfer">Insuficiência cardíaca com fração reduzida</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="gota">
+<label class="form-check-label" for="gota">Gota</label>
+</div>
 </div>
 <div id="medicacoesHAS" style="display:none;">
 
 <h4>Classes em uso</h4>
 <div class="condicoes">
-<label><input type="checkbox" id="usaDIU"> Diurético</label>
-<label><input type="checkbox" id="usaBCC"> Bloqueador de canal de cálcio</label>
-<label><input type="checkbox" id="usaIECA_BRA"> IECA ou BRA</label>
-<label><input type="checkbox" id="usaBB"> Beta-bloqueador</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="usaDIU">
+<label class="form-check-label" for="usaDIU"> Diurético</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="usaBCC">
+<label class="form-check-label" for="usaBCC"> Bloqueador de canal de cálcio</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="usaIECA_BRA">
+<label class="form-check-label" for="usaIECA_BRA"> IECA ou BRA</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="usaBB">
+<label class="form-check-label" for="usaBB"> Beta-bloqueador</label>
+</div>
 </div>
 </div>
 </div>
@@ -234,24 +363,39 @@ if(h1){
 <div class="grid">
 <label>
 História familiar de diabetes
-<select id="historiaDM">
+<select id="historiaDM" class="form-select" aria-label="Default select example">
 <option value="nenhum">Nenhuma</option>
 <option value="segundo">Segundo grau</option>
 <option value="primeiro">Primeiro grau</option>
 </select>
 </label>
-<div>Glicemia de jejum (mg/dL)<input id="glicJejum" type="number"></div>
-<div>HbA1c (%)<input id="hba1c" type="number" step="0.1"></div>
-<div>TOTG 2h (mg/dL)<input id="totg" type="number"></div>
-<div>Glicemia ao acaso (mg/dL)<input id="glicAcaso" type="number"></div>
+<div>Glicemia de jejum (mg/dL)<input id="glicJejum" type="number" class="form-control"></div>
+<div>HbA1c (%)<input id="hba1c" type="number" class="form-control" step="0.1"></div>
+<div>TOTG 2h (mg/dL)<input id="totg" type="number" class="form-control"></div>
+<div>Glicemia ao acaso (mg/dL)<input id="glicAcaso" type="number" class="form-control"></div>
 </div>
 
 <div class="condicoes">
-<label><input type="checkbox" id="dm">Diabetes mellitus</label>
-<label><input type="checkbox" id="atividade">Atividade física ≥30 min/dia</label>
-<label><input type="checkbox" id="frutas">Consome frutas e verduras diariamente</label>
-<label><input type="checkbox" id="glicemiaAlterada">História de glicemia elevada</label>
-<label><input type="checkbox" id="dmSintomatico">Diabetes sintomático</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="dm">
+<label class="form-check-label" for="dm">Diabetes mellitus</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="atividade">
+<label class="form-check-label" for="atividade">Atividade física ≥30 min/dia</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="frutas">
+<label class="form-check-label" for="frutas">Consome frutas e verduras diariamente</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="glicemiaAlterada">
+<label class="form-check-label" for="glicemiaAlterada">História de glicemia elevada</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="dmSintomatico">
+<label class="form-check-label" for="dmSintomatico">Diabetes sintomático</label>
+</div>
 </div>
 </div>
 
@@ -259,21 +403,21 @@ História familiar de diabetes
 <h2>Dislipidemia e PREVENT</h2>
 
 <div class="grid">
-<div>LDL<input id="ldl" type="number"></div>
-<div>HDL<input id="hdl" type="number"></div>
-<div>Colesterol total<input id="colTotal" type="number"></div>
-<div>Triglicerídeos<input id="tg" type="number"></div>
+<div>LDL<input id="ldl" type="number" class="form-control"></div>
+<div>HDL<input id="hdl" type="number" class="form-control"></div>
+<div>Colesterol total<input id="colTotal" type="number" class="form-control"></div>
+<div>Triglicerídeos<input id="tg" type="number" class="form-control"></div>
 
-<div>TFG<input id="egfr" type="number"></div>
+<div>TFG<input id="egfr" type="number" class="form-control"></div>
 
-<div>UACR<input id="uacr" type="number"></div>
+<div>UACR<input id="uacr" type="number" class="form-control"></div>
 
 <div>Escore PREVENT (%)
-<input id="prevent" type="text" readonly>
+<input id="prevent" type="text" class="form-control" readonly>
 </div>
 
 <label>Usa estatina?
-<select id="statusEST">
+<select id="statusEST" class="form-select" aria-label="Default select example">
 <option value="não">Não</option>
 <option value="sim">Sim</option>
 </select>
@@ -281,30 +425,40 @@ História familiar de diabetes
 </div>
 
 <div class="condicoes">
-<label><input type="checkbox" id="dlp">Dislipidemia</label>
-<label><input type="checkbox" id="aterosub">Aterosclerose subclínica</label>
-<label><input type="checkbox" id="ateromai">Aterosclerose >50%</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="dlp">
+<label class="form-check-label" for="dlp">Dislipidemia</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="aterosub">
+<label class="form-check-label" for="aterosub">Aterosclerose subclínica</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="ateromai">
+<label class="form-check-label" for="ateromai">Aterosclerose >50%</label>
+</div>
 </div>
 
 </div>
 
-<button onclick="calc()">Avaliar</button>
+<button class="btn btn-primary btn-lg" onclick="calc()">Avaliar</button>
+<br><br>
 
+<div class="card resultadoCard"><h2>Resultado</h2><pre id="r"></pre></div>
 
-<div class="card"><h2>Resultado</h2><pre id="r"></pre></div>
-
-<div class="card">
+<div class="card soapCard">
 <h3>SOAP</h3>
-<textarea id="soaps"></textarea>
-<button onclick="navigator.clipboard.writeText(document.getElementById('soaps').value)">Copiar S</button>
-<br><br><textarea id="soapo"></textarea>
-<button onclick="navigator.clipboard.writeText(document.getElementById('soapo').value)">Copiar O</button>
-<br><br><textarea id="soapa"></textarea>
-<button onclick="navigator.clipboard.writeText(document.getElementById('soapa').value)">Copiar A</button>
-<br><br><textarea id="soapp"></textarea>
-<button onclick="navigator.clipboard.writeText(document.getElementById('soapp').value)">Copiar P</button>
+
+<textarea id="soaps" class="form-control"></textarea>
+<div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('soaps').value)">Copiar S</button></div>
+<br><br><textarea id="soapo" class="form-control"></textarea>
+<div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('soapo').value)">Copiar O</button></div>
+<br><br><textarea id="soapa" class="form-control"></textarea>
+<div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('soapa').value)">Copiar A</button></div>
+<br><br><textarea id="soapp" class="form-control"></textarea>
+<div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('soapp').value)">Copiar P</button></div>
 </div>
-<button onclick="limparFormulario()">Limpar tudo</button>
+<button class="btn btn-secondary btn-lg" onclick="limparFormulario()">Limpar tudo</button>
 
 </div></div>
 </div></div>
@@ -332,21 +486,24 @@ História familiar de diabetes
 <div>
 Idade (meses)
 <input id="idadeMeses"
-       type="number"
+       type="number" class="form-control"
        min="0"
        max="60"
        oninput="atualizaPuericultura()">
 </div>
-<div>Peso (kg)<input id="pesoPueri" type="number"></div>
-<div>Sexo<select id="sexoPueri">
+<div>Peso (kg)<input id="pesoPueri" type="number" class="form-control"></div>
+<div>Sexo<select id="sexoPueri" class="form-select" aria-label="Default select example">
 <option value=""></option>
 <option value="masculino">Masculino</option>
 <option value="feminino">Feminino</option>
 </select></div>
-<div>Estatura (cm)<input id="alturaPueri" type="number"></div>
-<div>Perímetro cefálico (cm)<input id="pc" type="number"></div>
-<div>Polpas digitais na fontanela <input id="polpas" type="number"></div>
-<label><input type="checkbox" id="erudent">Presença de erupção dentaria</label>
+<div>Estatura (cm)<input id="alturaPueri" type="number" class="form-control"></div>
+<div>Perímetro cefálico (cm)<input id="pc" type="number" class="form-control"></div>
+<div>Polpas digitais na fontanela <input id="polpas" type="number" class="form-control"></div>
+<div class="condicoes"><div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="erudent">
+<label class="form-check-label" for="erudent">Presença de erupção dentaria</label>
+</div></div>
 
 </div>
 </div>
@@ -360,29 +517,62 @@ Idade (meses)
 <h3>2 meses</h3>
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m2_acalma">Acalma-se ao conversar ou pegá-lo no colo</label>
-<label><input type="checkbox" id="m2_olhar">Olha para seu rosto</label>
-<label><input type="checkbox" id="m2_feliz">Parece feliz em vê-lo quando você anda até ele</label>
-<label><input type="checkbox" id="m2_sorri">Sorri quando você fala ou sorri para ele</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_acalma">
+<label class="form-check-label" for="m2_acalma">Acalma-se ao conversar ou pegá-lo no colo</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_olhar">
+<label class="form-check-label" for="m2_olhar">Olha para seu rosto</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_feliz">
+<label class="form-check-label" for="m2_feliz">Parece feliz em vê-lo quando você anda até ele</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_sorri">
+<label class="form-check-label" for="m2_sorri">Sorri quando você fala ou sorri para ele</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m2_sons">Emite outros sons diferentes de chorar</label>
-<label><input type="checkbox" id="m2_reage">Reage a sons altos</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_sons">
+<label class="form-check-label" for="m2_sons">Emite outros sons diferentes de chorar</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_reage">
+<label class="form-check-label" for="m2_reage">Reage a sons altos</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m2_observa">Observa você enquanto você se move</label>
-<label><input type="checkbox" id="m2_olha">Olha para um brinquedo por vários segundos</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_observa">
+<label class="form-check-label" for="m2_observa">Observa você enquanto você se move</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_olha">
+<label class="form-check-label" for="m2_olha">Olha para um brinquedo por vários segundos</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m2_cabecaErguida">Mantém a cabeça erguida quando está de bruços</label>
-<label><input type="checkbox" id="m2_moveBracos">Move os dois braços e as duas pernas</label>
-<label><input type="checkbox" id="m2_abreMaos">Abre as mãos brevemente</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_cabecaErguida">
+<label class="form-check-label" for="m2_cabecaErguida">Mantém a cabeça erguida quando está de bruços</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_moveBracos">
+<label class="form-check-label" for="m2_moveBracos">Move os dois braços e as duas pernas</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m2_abreMaos">
+<label class="form-check-label" for="m2_abreMaos">Abre as mãos brevemente</label>
+</div>
 </div>
 
 </div>
@@ -397,7 +587,10 @@ Idade (meses)
 <h3>4 meses</h3>
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m4_sorri2">Sorri sozinho para chamar sua atenção.</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_sorri2">
+<label class="form-check-label" for="m4_sorri2">Sorri sozinho para chamar sua atenção.</label>
+</div>
 <label><input type="checkbox" id="m4_ri">Ri (ainda não uma risada completa) quando você
 tenta fazê-lo rir</label>
 <label><input type="checkbox" id="m4_olhaVoce">Olha para você, se move ou faz sons para obter ou
@@ -408,7 +601,10 @@ manter sua atenção</label>
 <div class="condipu">
 <label><input type="checkbox" id="m4_fome">Se estiver com fome, abre a boca quando vê a mama
 ou a mamadeira</label>
-<label><input type="checkbox" id="m4_olhaMaos">Olha para suas mãos com interesse</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_olhaMaos">
+<label class="form-check-label" for="m4_olhaMaos">Olha para suas mãos com interesse</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
@@ -417,17 +613,32 @@ ou a mamadeira</label>
 segurando-o</label>
 <label><input type="checkbox" id="m4_seguraBrinquedo">Segura um brinquedo quando você coloca na mão
 dele</label>
-<label><input type="checkbox" id="m4_usaBracos">Usa os braços para balançar brinquedos</label>
-<label><input type="checkbox" id="m4_trazMaos">Traz as mãos para a boca</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_usaBracos">
+<label class="form-check-label" for="m4_usaBracos">Usa os braços para balançar brinquedos</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_trazMaos">
+<label class="form-check-label" for="m4_trazMaos">Traz as mãos para a boca</label>
+</div>
 <label><input type="checkbox" id="m4_empurraTronco">Empurra o tronco para cima apoiado nos cotovelos/
 antebraços quando deitado de barriga para baixo</label>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m4_sons2">Faz sons como “oooo”, “aahh”</label>
-<label><input type="checkbox" id="m4_sonsFala">Faz sons quando você fala com ele</label>
-<label><input type="checkbox" id="m4_viraCabeca2">Vira a cabeça para o som de sua voz</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_sons2">
+<label class="form-check-label" for="m4_sons2">Faz sons como “oooo”, “aahh”</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_sonsFala">
+<label class="form-check-label" for="m4_sonsFala">Faz sons quando você fala com ele</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_viraCabeca2">
+<label class="form-check-label" for="m4_viraCabeca2">Vira a cabeça para o som de sua voz</label>
+</div>
 </div>
 
 </div>
@@ -442,30 +653,66 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m6_reconhecePessoas">Reconhece pessoas familiares</label>
-<label><input type="checkbox" id="m6_espelho">Gosta de se olhar no espelho</label>
-<label><input type="checkbox" id="m6_risadas">Dá risadas</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_reconhecePessoas">
+<label class="form-check-label" for="m6_reconhecePessoas">Reconhece pessoas familiares</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_espelho">
+<label class="form-check-label" for="m6_espelho">Gosta de se olhar no espelho</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_risadas">
+<label class="form-check-label" for="m6_risadas">Dá risadas</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m6_revezaSons">Se reveza fazendo sons com você</label>
-<label><input type="checkbox" id="m6_sopraSaliva">Sopra saliva, coloca a língua para fora e sopra</label>
-<label><input type="checkbox" id="m6_gritinhos">Faz barulhos agudos como "gritinhos"</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_revezaSons">
+<label class="form-check-label" for="m6_revezaSons">Se reveza fazendo sons com você</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_sopraSaliva">
+<label class="form-check-label" for="m6_sopraSaliva">Sopra saliva, coloca a língua para fora e sopra</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_gritinhos">
+<label class="form-check-label" for="m6_gritinhos">Faz barulhos agudos como "gritinhos"</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m6_exploraBoca">Coloca coisas na boca para explorá-las</label>
-<label><input type="checkbox" id="m6_alcancaBrinquedo">Alcança para pegar um brinquedo que ele quer</label>
-<label><input type="checkbox" id="m6_fechaLabios">Fecha os lábios para mostrar que não quer mais comida</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_exploraBoca">
+<label class="form-check-label" for="m6_exploraBoca">Coloca coisas na boca para explorá-las</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_alcancaBrinquedo">
+<label class="form-check-label" for="m6_alcancaBrinquedo">Alcança para pegar um brinquedo que ele quer</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_fechaLabios">
+<label class="form-check-label" for="m6_fechaLabios">Fecha os lábios para mostrar que não quer mais comida</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m6_rolaSupinoProno">Vira de supino para prono (de barriga para cima para barriga para baixo)</label>
-<label><input type="checkbox" id="m6_empurraBracos">Empurra o corpo com braços esticados quando deitado de barriga para baixo</label>
-<label><input type="checkbox" id="m6_apoiaSentado">Apoia-se nas mãos para se sustentar quando sentado</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_rolaSupinoProno">
+<label class="form-check-label" for="m6_rolaSupinoProno">Vira de supino para prono (de barriga para cima para barriga para baixo)</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_empurraBracos">
+<label class="form-check-label" for="m6_empurraBracos">Empurra o corpo com braços esticados quando deitado de barriga para baixo</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m6_apoiaSentado">
+<label class="form-check-label" for="m6_apoiaSentado">Apoia-se nas mãos para se sustentar quando sentado</label>
+</div>
 </div>
 
 </div>
@@ -481,31 +728,70 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m9_estranhos">É tímido, pegajoso ou temeroso perto de estranhos</label>
-<label><input type="checkbox" id="m9_expressoes">Mostra várias expressões faciais, como feliz, triste, irritado e surpreso</label>
-<label><input type="checkbox" id="m9_nome">Olha quando você o chama pelo nome</label>
-<label><input type="checkbox" id="m9_reageSaida">Reage quando você sai (olha, estende a mão para você ou chora)</label>
-<label><input type="checkbox" id="m9_escondeAchou">Sorri ou ri quando você joga "escondeu-achou"</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_estranhos">
+<label class="form-check-label" for="m9_estranhos">É tímido, pegajoso ou temeroso perto de estranhos</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_expressoes">
+<label class="form-check-label" for="m9_expressoes">Mostra várias expressões faciais, como feliz, triste, irritado e surpreso</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_nome">
+<label class="form-check-label" for="m9_nome">Olha quando você o chama pelo nome</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_reageSaida">
+<label class="form-check-label" for="m9_reageSaida">Reage quando você sai (olha, estende a mão para você ou chora)</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_escondeAchou">
+<label class="form-check-label" for="m9_escondeAchou">Sorri ou ri quando você joga "escondeu-achou"</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m9_mamababa">Faz sons diferentes como "mamamama" e "babababa"</label>
-<label><input type="checkbox" id="m9_bracosColo">Levanta os braços para ser pego</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_mamababa">
+<label class="form-check-label" for="m9_mamababa">Faz sons diferentes como "mamamama" e "babababa"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_bracosColo">
+<label class="form-check-label" for="m9_bracosColo">Levanta os braços para ser pego</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m9_procuraObjeto">Procura objetos quando jogados fora de vista (como colher ou brinquedo)</label>
-<label><input type="checkbox" id="m9_bateObjetos">Bate duas coisas juntas</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_procuraObjeto">
+<label class="form-check-label" for="m9_procuraObjeto">Procura objetos quando jogados fora de vista (como colher ou brinquedo)</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_bateObjetos">
+<label class="form-check-label" for="m9_bateObjetos">Bate duas coisas juntas</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m9_sentaSozinho">Chega à posição sentada sozinho</label>
-<label><input type="checkbox" id="m9_trocaMaos">Move as coisas de uma mão para a outra</label>
-<label><input type="checkbox" id="m9_pegaComDedos">Usa os dedos para pegar comida para si mesmo</label>
-<label><input type="checkbox" id="m9_sentaSemApoio">Senta-se sem suporte</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_sentaSozinho">
+<label class="form-check-label" for="m9_sentaSozinho">Chega à posição sentada sozinho</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_trocaMaos">
+<label class="form-check-label" for="m9_trocaMaos">Move as coisas de uma mão para a outra</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_pegaComDedos">
+<label class="form-check-label" for="m9_pegaComDedos">Usa os dedos para pegar comida para si mesmo</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m9_sentaSemApoio">
+<label class="form-check-label" for="m9_sentaSemApoio">Senta-se sem suporte</label>
+</div>
 </div>
 
 </div>
@@ -521,28 +807,58 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m12_joga">Joga com você, como parceiro de jogo</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_joga">
+<label class="form-check-label" for="m12_joga">Joga com você, como parceiro de jogo</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m12_tchau">Acena "adeus" ou "tchau"</label>
-<label><input type="checkbox" id="m12_mamaPapa">Chama "mamã", "papá" ou outro nome especial</label>
-<label><input type="checkbox" id="m12_entendeNao">Entende "não" (faz uma pausa breve ou para quando você diz isso)</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_tchau">
+<label class="form-check-label" for="m12_tchau">Acena "adeus" ou "tchau"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_mamaPapa">
+<label class="form-check-label" for="m12_mamaPapa">Chama "mamã", "papá" ou outro nome especial</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_entendeNao">
+<label class="form-check-label" for="m12_entendeNao">Entende "não" (faz uma pausa breve ou para quando você diz isso)</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m12_recipiente">Coloca algo em um recipiente, como um bloco em um copo</label>
-<label><input type="checkbox" id="m12_escondido">Procura coisas que vê você esconder, como um brinquedo debaixo de um cobertor</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_recipiente">
+<label class="form-check-label" for="m12_recipiente">Coloca algo em um recipiente, como um bloco em um copo</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_escondido">
+<label class="form-check-label" for="m12_escondido">Procura coisas que vê você esconder, como um brinquedo debaixo de um cobertor</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m12_ficaPe">Puxa para cima para ficar em pé</label>
-<label><input type="checkbox" id="m12_moveis">Caminha segurando nos móveis</label>
-<label><input type="checkbox" id="m12_copo">Bebe de um copo sem tampa enquanto você o segura</label>
-<label><input type="checkbox" id="m12_pinca">Pega objetos entre o polegar e o indicador (pinça fina)</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_ficaPe">
+<label class="form-check-label" for="m12_ficaPe">Puxa para cima para ficar em pé</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_moveis">
+<label class="form-check-label" for="m12_moveis">Caminha segurando nos móveis</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_copo">
+<label class="form-check-label" for="m12_copo">Bebe de um copo sem tampa enquanto você o segura</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m12_pinca">
+<label class="form-check-label" for="m12_pinca">Pega objetos entre o polegar e o indicador (pinça fina)</label>
+</div>
 </div>
 
 </div>
@@ -558,31 +874,70 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m15_imitaCriancas">Imita outras crianças enquanto brinca, como tirar brinquedos de um recipiente quando outra criança o faz</label>
-<label><input type="checkbox" id="m15_mostraObjeto">Mostra-lhe um objeto que ele gosta</label>
-<label><input type="checkbox" id="m15_batePalmas">Bate palmas quando animado</label>
-<label><input type="checkbox" id="m15_abracaBrinquedo">Abraça a boneca de pelúcia ou outro brinquedo</label>
-<label><input type="checkbox" id="m15_afeto">Mostra afeto (abraços ou beijos)</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_imitaCriancas">
+<label class="form-check-label" for="m15_imitaCriancas">Imita outras crianças enquanto brinca, como tirar brinquedos de um recipiente quando outra criança o faz</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_mostraObjeto">
+<label class="form-check-label" for="m15_mostraObjeto">Mostra-lhe um objeto que ele gosta</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_batePalmas">
+<label class="form-check-label" for="m15_batePalmas">Bate palmas quando animado</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_abracaBrinquedo">
+<label class="form-check-label" for="m15_abracaBrinquedo">Abraça a boneca de pelúcia ou outro brinquedo</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_afeto">
+<label class="form-check-label" for="m15_afeto">Mostra afeto (abraços ou beijos)</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m15_palavras">Tenta dizer uma ou duas palavras além de "mamã" ou "papá", como "bo" para bola ou "auau" para cachorro</label>
-<label><input type="checkbox" id="m15_nomeiaObjeto">Olha para um objeto familiar quando você o nomeia</label>
-<label><input type="checkbox" id="m15_segueInstrucao">Segue instruções dadas com gesto e palavras</label>
-<label><input type="checkbox" id="m15_aponta">Aponta para pedir algo ou para obter ajuda</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_palavras">
+<label class="form-check-label" for="m15_palavras">Tenta dizer uma ou duas palavras além de "mamã" ou "papá", como "bo" para bola ou "auau" para cachorro</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_nomeiaObjeto">
+<label class="form-check-label" for="m15_nomeiaObjeto">Olha para um objeto familiar quando você o nomeia</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_segueInstrucao">
+<label class="form-check-label" for="m15_segueInstrucao">Segue instruções dadas com gesto e palavras</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_aponta">
+<label class="form-check-label" for="m15_aponta">Aponta para pedir algo ou para obter ajuda</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m15_usoCorreto">Tenta usar as coisas da maneira correta, como telefone, copo ou livro</label>
-<label><input type="checkbox" id="m15_empilha">Empilha pelo menos dois pequenos objetos, como blocos</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_usoCorreto">
+<label class="form-check-label" for="m15_usoCorreto">Tenta usar as coisas da maneira correta, como telefone, copo ou livro</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_empilha">
+<label class="form-check-label" for="m15_empilha">Empilha pelo menos dois pequenos objetos, como blocos</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m15_passos">Dá alguns passos por conta própria</label>
-<label><input type="checkbox" id="m15_alimentaDedos">Usa os dedos para se alimentar com um pouco de comida</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_passos">
+<label class="form-check-label" for="m15_passos">Dá alguns passos por conta própria</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m15_alimentaDedos">
+<label class="form-check-label" for="m15_alimentaDedos">Usa os dedos para se alimentar com um pouco de comida</label>
+</div>
 </div>
 
 </div>
@@ -598,33 +953,78 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m18_afasta">Afasta-se de você, mas procura ter certeza de que você está por perto</label>
-<label><input type="checkbox" id="m18_aponta">Aponta para mostrar algo interessante</label>
-<label><input type="checkbox" id="m18_lavarMaos">Estende as mãos para você lavá-las</label>
-<label><input type="checkbox" id="m18_livro">Olha para algumas páginas em um livro com você</label>
-<label><input type="checkbox" id="m18_vestir">Ajuda você a vesti-lo empurrando o braço pela manga ou levantando o pé</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_afasta">
+<label class="form-check-label" for="m18_afasta">Afasta-se de você, mas procura ter certeza de que você está por perto</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_aponta">
+<label class="form-check-label" for="m18_aponta">Aponta para mostrar algo interessante</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_lavarMaos">
+<label class="form-check-label" for="m18_lavarMaos">Estende as mãos para você lavá-las</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_livro">
+<label class="form-check-label" for="m18_livro">Olha para algumas páginas em um livro com você</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_vestir">
+<label class="form-check-label" for="m18_vestir">Ajuda você a vesti-lo empurrando o braço pela manga ou levantando o pé</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m18_tresPalavras">Tenta dizer três ou mais palavras além de "mamãe" ou "papá"</label>
-<label><input type="checkbox" id="m18_instrucao">Segue instruções sem gestos, como dar um brinquedo quando solicitado</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_tresPalavras">
+<label class="form-check-label" for="m18_tresPalavras">Tenta dizer três ou mais palavras além de "mamãe" ou "papá"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_instrucao">
+<label class="form-check-label" for="m18_instrucao">Segue instruções sem gestos, como dar um brinquedo quando solicitado</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m18_copia">Copia você fazendo tarefas, como varrer com uma vassoura</label>
-<label><input type="checkbox" id="m18_brinca">Brinca com brinquedos de maneira simples, como empurrar um carro de brinquedo</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_copia">
+<label class="form-check-label" for="m18_copia">Copia você fazendo tarefas, como varrer com uma vassoura</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_brinca">
+<label class="form-check-label" for="m18_brinca">Brinca com brinquedos de maneira simples, como empurrar um carro de brinquedo</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m18_caminha">Caminha sem se segurar em ninguém ou em nada</label>
-<label><input type="checkbox" id="m18_rabisca">Rabisca</label>
-<label><input type="checkbox" id="m18_copo">Bebe em um copo sem tampa e pode derramar às vezes</label>
-<label><input type="checkbox" id="m18_alimenta">Alimenta-se com os dedos</label>
-<label><input type="checkbox" id="m18_colher">Tenta usar uma colher</label>
-<label><input type="checkbox" id="m18_sobe">Sobe dentro e fora de sofá ou cadeira sem ajuda</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_caminha">
+<label class="form-check-label" for="m18_caminha">Caminha sem se segurar em ninguém ou em nada</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_rabisca">
+<label class="form-check-label" for="m18_rabisca">Rabisca</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_copo">
+<label class="form-check-label" for="m18_copo">Bebe em um copo sem tampa e pode derramar às vezes</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_alimenta">
+<label class="form-check-label" for="m18_alimenta">Alimenta-se com os dedos</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_colher">
+<label class="form-check-label" for="m18_colher">Tenta usar uma colher</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m18_sobe">
+<label class="form-check-label" for="m18_sobe">Sobe dentro e fora de sofá ou cadeira sem ajuda</label>
+</div>
 </div>
 
 </div>
@@ -640,31 +1040,70 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m24_empatia">Nota quando os outros estão magoados ou chateados, como parar ou parecer triste quando alguém está chorando</label>
-<label><input type="checkbox" id="m24_reacao">Olha para o seu rosto para ver como reagir em uma nova situação</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_empatia">
+<label class="form-check-label" for="m24_empatia">Nota quando os outros estão magoados ou chateados, como parar ou parecer triste quando alguém está chorando</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_reacao">
+<label class="form-check-label" for="m24_reacao">Olha para o seu rosto para ver como reagir em uma nova situação</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m24_livro">Aponta para as coisas em um livro quando você pergunta, como "Onde está o urso?"</label>
-<label><input type="checkbox" id="m24_duasPalavras">Diz pelo menos duas palavras juntas, como "Mais leite"</label>
-<label><input type="checkbox" id="m24_partesCorpo">Aponta para pelo menos duas partes do corpo quando solicitado</label>
-<label><input type="checkbox" id="m24_gestos">Usa mais gestos além de acenar e apontar, como mandar beijo ou fazer sim com a cabeça</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_livro">
+<label class="form-check-label" for="m24_livro">Aponta para as coisas em um livro quando você pergunta, como "Onde está o urso?"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_duasPalavras">
+<label class="form-check-label" for="m24_duasPalavras">Diz pelo menos duas palavras juntas, como "Mais leite"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_partesCorpo">
+<label class="form-check-label" for="m24_partesCorpo">Aponta para pelo menos duas partes do corpo quando solicitado</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_gestos">
+<label class="form-check-label" for="m24_gestos">Usa mais gestos além de acenar e apontar, como mandar beijo ou fazer sim com a cabeça</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m24_duasMaos">Segura algo em uma mão enquanto usa a outra mão para uma tarefa</label>
-<label><input type="checkbox" id="m24_botoes">Tenta usar interruptores, botões ou comandos em brinquedos</label>
-<label><input type="checkbox" id="m24_variosBrinquedos">Brinca com mais de um brinquedo ao mesmo tempo</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_duasMaos">
+<label class="form-check-label" for="m24_duasMaos">Segura algo em uma mão enquanto usa a outra mão para uma tarefa</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_botoes">
+<label class="form-check-label" for="m24_botoes">Tenta usar interruptores, botões ou comandos em brinquedos</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_variosBrinquedos">
+<label class="form-check-label" for="m24_variosBrinquedos">Brinca com mais de um brinquedo ao mesmo tempo</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m24_chuta">Chuta uma bola</label>
-<label><input type="checkbox" id="m24_corre">Corre</label>
-<label><input type="checkbox" id="m24_escadas">Sobe algumas escadas com ou sem ajuda</label>
-<label><input type="checkbox" id="m24_colher">Come com uma colher</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_chuta">
+<label class="form-check-label" for="m24_chuta">Chuta uma bola</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_corre">
+<label class="form-check-label" for="m24_corre">Corre</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_escadas">
+<label class="form-check-label" for="m24_escadas">Sobe algumas escadas com ou sem ajuda</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m24_colher">
+<label class="form-check-label" for="m24_colher">Come com uma colher</label>
+</div>
 </div>
 
 </div>
@@ -680,33 +1119,78 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m30_brincaCriancas">Brinca ao lado de outras crianças e às vezes brinca com elas</label>
-<label><input type="checkbox" id="m30_olheParaMim">Mostra o que pode fazer dizendo "Olhe para mim!"</label>
-<label><input type="checkbox" id="m30_rotinas">Segue rotinas simples quando solicitado, como guardar brinquedos</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_brincaCriancas">
+<label class="form-check-label" for="m30_brincaCriancas">Brinca ao lado de outras crianças e às vezes brinca com elas</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_olheParaMim">
+<label class="form-check-label" for="m30_olheParaMim">Mostra o que pode fazer dizendo "Olhe para mim!"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_rotinas">
+<label class="form-check-label" for="m30_rotinas">Segue rotinas simples quando solicitado, como guardar brinquedos</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m30_50Palavras">Fala cerca de 50 palavras</label>
-<label><input type="checkbox" id="m30_duasPalavrasAcao">Diz duas ou mais palavras com uma palavra de ação, como "Corre cachorro!"</label>
-<label><input type="checkbox" id="m30_nomeiaLivro">Nomeia coisas em um livro quando você aponta e pergunta "O que é isso?"</label>
-<label><input type="checkbox" id="m30_pronomes">Diz palavras como "eu", "você" ou "nós"</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_50Palavras">
+<label class="form-check-label" for="m30_50Palavras">Fala cerca de 50 palavras</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_duasPalavrasAcao">
+<label class="form-check-label" for="m30_duasPalavrasAcao">Diz duas ou mais palavras com uma palavra de ação, como "Corre cachorro!"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_nomeiaLivro">
+<label class="form-check-label" for="m30_nomeiaLivro">Nomeia coisas em um livro quando você aponta e pergunta "O que é isso?"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_pronomes">
+<label class="form-check-label" for="m30_pronomes">Diz palavras como "eu", "você" ou "nós"</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m30_fazDeConta">Usa objetos para faz de conta, como alimentar uma boneca</label>
-<label><input type="checkbox" id="m30_resolveProblema">Mostra habilidades simples de resolução de problemas</label>
-<label><input type="checkbox" id="m30_duasEtapas">Segue instruções de duas etapas</label>
-<label><input type="checkbox" id="m30_cor">Reconhece pelo menos uma cor</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_fazDeConta">
+<label class="form-check-label" for="m30_fazDeConta">Usa objetos para faz de conta, como alimentar uma boneca</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_resolveProblema">
+<label class="form-check-label" for="m30_resolveProblema">Mostra habilidades simples de resolução de problemas</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_duasEtapas">
+<label class="form-check-label" for="m30_duasEtapas">Segue instruções de duas etapas</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_cor">
+<label class="form-check-label" for="m30_cor">Reconhece pelo menos uma cor</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m30_torce">Usa as mãos para torcer coisas, como maçanetas ou tampas</label>
-<label><input type="checkbox" id="m30_tiraRoupa">Tira algumas roupas sozinho</label>
-<label><input type="checkbox" id="m30_pula">Pula do chão com os dois pés</label>
-<label><input type="checkbox" id="m30_paginas">Vira páginas de livros uma de cada vez</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_torce">
+<label class="form-check-label" for="m30_torce">Usa as mãos para torcer coisas, como maçanetas ou tampas</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_tiraRoupa">
+<label class="form-check-label" for="m30_tiraRoupa">Tira algumas roupas sozinho</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_pula">
+<label class="form-check-label" for="m30_pula">Pula do chão com os dois pés</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m30_paginas">
+<label class="form-check-label" for="m30_paginas">Vira páginas de livros uma de cada vez</label>
+</div>
 </div>
 
 </div>
@@ -722,30 +1206,66 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m36_creche">Acalma-se dentro de 10 minutos depois de deixá-lo na creche</label>
-<label><input type="checkbox" id="m36_brincaCriancas">Observa outras crianças e se junta a elas para brincar</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_creche">
+<label class="form-check-label" for="m36_creche">Acalma-se dentro de 10 minutos depois de deixá-lo na creche</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_brincaCriancas">
+<label class="form-check-label" for="m36_brincaCriancas">Observa outras crianças e se junta a elas para brincar</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m36_conversa">Conversa com você usando pelo menos duas trocas de turno</label>
-<label><input type="checkbox" id="m36_perguntas">Pergunta "quem", "o quê", "onde" ou "por quê"</label>
-<label><input type="checkbox" id="m36_descreveAcao">Diz que ação está acontecendo em uma imagem ou livro quando perguntado</label>
-<label><input type="checkbox" id="m36_nome">Diz o primeiro nome quando perguntado</label>
-<label><input type="checkbox" id="m36_falaClara">Fala bem o suficiente para que os outros entendam na maior parte do tempo</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_conversa">
+<label class="form-check-label" for="m36_conversa">Conversa com você usando pelo menos duas trocas de turno</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_perguntas">
+<label class="form-check-label" for="m36_perguntas">Pergunta "quem", "o quê", "onde" ou "por quê"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_descreveAcao">
+<label class="form-check-label" for="m36_descreveAcao">Diz que ação está acontecendo em uma imagem ou livro quando perguntado</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_nome">
+<label class="form-check-label" for="m36_nome">Diz o primeiro nome quando perguntado</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_falaClara">
+<label class="form-check-label" for="m36_falaClara">Fala bem o suficiente para que os outros entendam na maior parte do tempo</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m36_circulo">Desenha um círculo quando você mostra como fazer</label>
-<label><input type="checkbox" id="m36_quente">Evita tocar objetos quentes quando avisado</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_circulo">
+<label class="form-check-label" for="m36_circulo">Desenha um círculo quando você mostra como fazer</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_quente">
+<label class="form-check-label" for="m36_quente">Evita tocar objetos quentes quando avisado</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m36_alinhava">Alinhava itens juntos, como contas grandes ou macarrões</label>
-<label><input type="checkbox" id="m36_veste">Veste algumas roupas sozinho, como calças soltas ou uma jaqueta</label>
-<label><input type="checkbox" id="m36_garfo">Usa um garfo</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_alinhava">
+<label class="form-check-label" for="m36_alinhava">Alinhava itens juntos, como contas grandes ou macarrões</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_veste">
+<label class="form-check-label" for="m36_veste">Veste algumas roupas sozinho, como calças soltas ou uma jaqueta</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m36_garfo">
+<label class="form-check-label" for="m36_garfo">Usa um garfo</label>
+</div>
 </div>
 
 </div>
@@ -761,35 +1281,86 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m48_personagem">Finge ser um personagem ao brincar (professor, super-herói, cachorro)</label>
-<label><input type="checkbox" id="m48_brincar">Pede para brincar com outras crianças se ninguém estiver por perto</label>
-<label><input type="checkbox" id="m48_conforta">Conforta os outros que estão feridos ou tristes</label>
-<label><input type="checkbox" id="m48_perigo">Evita o perigo, como não pular de alturas altas no playground</label>
-<label><input type="checkbox" id="m48_ajudante">Gosta de ser um "ajudante"</label>
-<label><input type="checkbox" id="m48_comportamento">Muda o comportamento baseado em onde está (biblioteca, playground, etc.)</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_personagem">
+<label class="form-check-label" for="m48_personagem">Finge ser um personagem ao brincar (professor, super-herói, cachorro)</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_brincar">
+<label class="form-check-label" for="m48_brincar">Pede para brincar com outras crianças se ninguém estiver por perto</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_conforta">
+<label class="form-check-label" for="m48_conforta">Conforta os outros que estão feridos ou tristes</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_perigo">
+<label class="form-check-label" for="m48_perigo">Evita o perigo, como não pular de alturas altas no playground</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_ajudante">
+<label class="form-check-label" for="m48_ajudante">Gosta de ser um "ajudante"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_comportamento">
+<label class="form-check-label" for="m48_comportamento">Muda o comportamento baseado em onde está (biblioteca, playground, etc.)</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m48_frases">Diz frases com quatro ou mais palavras</label>
-<label><input type="checkbox" id="m48_musica">Diz algumas palavras de uma canção, história ou rima infantil</label>
-<label><input type="checkbox" id="m48_dia">Fala sobre pelo menos uma coisa que aconteceu durante o dia</label>
-<label><input type="checkbox" id="m48_responde">Responde perguntas simples como "Para que serve um casaco?"</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_frases">
+<label class="form-check-label" for="m48_frases">Diz frases com quatro ou mais palavras</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_musica">
+<label class="form-check-label" for="m48_musica">Diz algumas palavras de uma canção, história ou rima infantil</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_dia">
+<label class="form-check-label" for="m48_dia">Fala sobre pelo menos uma coisa que aconteceu durante o dia</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_responde">
+<label class="form-check-label" for="m48_responde">Responde perguntas simples como "Para que serve um casaco?"</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m48_cores">Nomeia algumas cores de objetos</label>
-<label><input type="checkbox" id="m48_historia">Conta o que vem a seguir em uma história bem conhecida</label>
-<label><input type="checkbox" id="m48_pessoa">Desenha uma pessoa com três ou mais partes do corpo</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_cores">
+<label class="form-check-label" for="m48_cores">Nomeia algumas cores de objetos</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_historia">
+<label class="form-check-label" for="m48_historia">Conta o que vem a seguir em uma história bem conhecida</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_pessoa">
+<label class="form-check-label" for="m48_pessoa">Desenha uma pessoa com três ou mais partes do corpo</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m48_bola">Pega uma bola grande na maior parte do tempo</label>
-<label><input type="checkbox" id="m48_serve">Serve a si mesmo comida ou água com supervisão</label>
-<label><input type="checkbox" id="m48_botoes">Desabotoa alguns botões</label>
-<label><input type="checkbox" id="m48_lapis">Segura lápis entre os dedos e o polegar (não no punho)</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_bola">
+<label class="form-check-label" for="m48_bola">Pega uma bola grande na maior parte do tempo</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_serve">
+<label class="form-check-label" for="m48_serve">Serve a si mesmo comida ou água com supervisão</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_botoes">
+<label class="form-check-label" for="m48_botoes">Desabotoa alguns botões</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m48_lapis">
+<label class="form-check-label" for="m48_lapis">Segura lápis entre os dedos e o polegar (não no punho)</label>
+</div>
 </div>
 
 </div>
@@ -805,33 +1376,78 @@ antebraços quando deitado de barriga para baixo</label>
 
 <h4>Marcos Sociais/Emocionais</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m60_regras">Segue regras ou se reveza ao brincar com outras crianças</label>
-<label><input type="checkbox" id="m60_canta">Canta, dança ou atua para você</label>
-<label><input type="checkbox" id="m60_tarefas">Faz tarefas simples em casa, como combinar meias ou limpar a mesa depois de comer</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_regras">
+<label class="form-check-label" for="m60_regras">Segue regras ou se reveza ao brincar com outras crianças</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_canta">
+<label class="form-check-label" for="m60_canta">Canta, dança ou atua para você</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_tarefas">
+<label class="form-check-label" for="m60_tarefas">Faz tarefas simples em casa, como combinar meias ou limpar a mesa depois de comer</label>
+</div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m60_historia">Conta uma história com pelo menos dois eventos</label>
-<label><input type="checkbox" id="m60_livro">Responde perguntas simples sobre um livro ou história</label>
-<label><input type="checkbox" id="m60_conversa">Mantém uma conversa com mais de três trocas de ideias</label>
-<label><input type="checkbox" id="m60_rimas">Usa ou reconhece rimas simples</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_historia">
+<label class="form-check-label" for="m60_historia">Conta uma história com pelo menos dois eventos</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_livro">
+<label class="form-check-label" for="m60_livro">Responde perguntas simples sobre um livro ou história</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_conversa">
+<label class="form-check-label" for="m60_conversa">Mantém uma conversa com mais de três trocas de ideias</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_rimas">
+<label class="form-check-label" for="m60_rimas">Usa ou reconhece rimas simples</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m60_conta10">Conta até 10</label>
-<label><input type="checkbox" id="m60_numeros">Nomeia alguns números entre 1 e 5 quando apontados</label>
-<label><input type="checkbox" id="m60_tempo">Usa palavras sobre o tempo, como "ontem", "amanhã", "manhã" ou "noite"</label>
-<label><input type="checkbox" id="m60_atencao">Mantém atenção por 5 a 10 minutos em atividades</label>
-<label><input type="checkbox" id="m60_letrasNome">Escreve algumas letras do próprio nome</label>
-<label><input type="checkbox" id="m60_nomeiaLetras">Nomeia algumas letras quando apontadas</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_conta10">
+<label class="form-check-label" for="m60_conta10">Conta até 10</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_numeros">
+<label class="form-check-label" for="m60_numeros">Nomeia alguns números entre 1 e 5 quando apontados</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_tempo">
+<label class="form-check-label" for="m60_tempo">Usa palavras sobre o tempo, como "ontem", "amanhã", "manhã" ou "noite"</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_atencao">
+<label class="form-check-label" for="m60_atencao">Mantém atenção por 5 a 10 minutos em atividades</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_letrasNome">
+<label class="form-check-label" for="m60_letrasNome">Escreve algumas letras do próprio nome</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_nomeiaLetras">
+<label class="form-check-label" for="m60_nomeiaLetras">Nomeia algumas letras quando apontadas</label>
+</div>
 </div>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m60_botoes">Abotoa alguns botões</label>
-<label><input type="checkbox" id="m60_pulaPe">Pula em um pé</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_botoes">
+<label class="form-check-label" for="m60_botoes">Abotoa alguns botões</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m60_pulaPe">
+<label class="form-check-label" for="m60_pulaPe">Pula em um pé</label>
+</div>
 </div>
 </div>
 </div>
@@ -842,7 +1458,7 @@ antebraços quando deitado de barriga para baixo</label>
 
 <div class="condicoes">
 
-<label>Aleitamento<select id="aleitamento">
+<label>Aleitamento<select id="aleitamento" class="form-select" aria-label="Default select example">
 <option value=""></option>
 <option value="Ale">Aleitamento Materno</option>
 <option value="Alesoform">Aleitamento apenas com fórmula</option>
@@ -851,18 +1467,32 @@ antebraços quando deitado de barriga para baixo</label>
 </select>
 </label>
 
-<label><input type="checkbox" id="frutpapa">Frutas (amassadas ou raspadas) e primeira papa principal de múltiplas misturas</label>
-<label><input type="checkbox" id="papadupla">Duas papa principais de misturas múltiplas</label>
-<label><input type="checkbox" id="introref">Introduzindo a refeição da família com ajuste de consistência</label>
-<label><input type="checkbox" id="comidafam">Comida da família, observando a adequação dos alimentos</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="frutpapa">
+<label class="form-check-label" for="frutpapa">Frutas (amassadas ou raspadas) e primeira papa principal de múltiplas misturas</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="papadupla">
+<label class="form-check-label" for="papadupla">Duas papa principais de misturas múltiplas</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="introref">
+<label class="form-check-label" for="introref">Introduzindo a refeição da família com ajuste de consistência</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="comidafam">
+<label class="form-check-label" for="comidafam">Comida da família, observando a adequação dos alimentos</label>
+</div>
 
-<label><input type="checkbox" id="todosGrupos">
-Consome todos os grupos alimentares
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="todosGrupos">
+<label class="form-check-label" for="todosGrupos">Consome todos os grupos alimentares</label>
+</div>
 
-<label><input type="checkbox" id="aguaAdequada">
-Ingesta hídrica adequada
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="aguaAdequada">
+<label class="form-check-label" for="aguaAdequada">Ingesta hídrica adequada</label>
+</div>
 
 </div>
 </div>
@@ -872,17 +1502,20 @@ Ingesta hídrica adequada
 <h3>Vacinação</h3>
 
 <div class="condicoes">
-<label><input type="checkbox" id="vacinasDia">
-Vacinas em dia
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="vacinasDia">
+<label class="form-check-label" for="vacinasDia">Vacinas em dia</label>
+</div>
 
-<label><input type="checkbox" id="vacinasREC">
-Recusa vacinal
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="vacinasREC">
+<label class="form-check-label" for="vacinasREC">Recusa vacinal</label>
+</div>
 
-<label><input type="checkbox" id="reacaoVacina">
-História de reação vacinal
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="reacaoVacina">
+<label class="form-check-label" for="reacaoVacina">História de reação vacinal</label>
+</div>
 </div>
 </div>
 
@@ -890,70 +1523,93 @@ História de reação vacinal
 
 <h3>Aspectos Sociais</h3>
 <div class="condicoes">
-<label><input type="checkbox" id="creche">
-Frequenta creche
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="creche">
+<label class="form-check-label" for="creche">Frequenta creche</label>
+</div>
 
-<label><input type="checkbox" id="brincadeiras">
-Brincadeiras adequadas para idade
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="brincadeiras">
+<label class="form-check-label" for="brincadeiras">Brincadeiras adequadas para idade</label>
+</div>
 
-<label><input type="checkbox" id="interacaoCriancas">
-Interação com outras crianças
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="interacaoCriancas">
+<label class="form-check-label" for="interacaoCriancas">Interação com outras crianças</label>
+</div>
 
-<label><input type="checkbox" id="ambienteSeguro">
-Ambiente seguro e afetuoso
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="ambienteSeguro">
+<label class="form-check-label" for="ambienteSeguro">Ambiente seguro e afetuoso</label>
+</div>
 
-<label><input type="checkbox" id="boaRelacao">
-Boa relação familiar
-</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="boaRelacao">
+<label class="form-check-label" for="boaRelacao">Boa relação familiar</label>
+</div>
 </div>
 </div>
 
 <div class="card">
     <h3>Rotina da Criança</h3>
-    <div>Sono<select id="sonoPueri">
+     <div class="condicoes">
+<label><h5>Sono:</h5><div><select id="sonoPueri" class="form-select" aria-label="Default select example">
 <option value="sonotranqui">Tranquilo</option>
 <option value="sonoagi">Agitado</option>
 <option value="sonomamar">Acorda para mamar</option>
-</select></div>
+</select></label></div></div>
     <h5>Eliminações fisiológicas:</h5>
     <div class="condicoes">
-<label><input type="checkbox" id="diudia">Diurese diária</label>
-<label><input type="checkbox" id="evaade">Evacuação adequada</label>
-<label><input type="checkbox" id="consitpação">Constipação</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="diudia">
+<label class="form-check-label" for="diudia">Diurese diária</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="evaade">
+<label class="form-check-label" for="evaade">Evacuação adequada</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="consitpação">
+<label class="form-check-label" for="consitpação">Constipação</label>
+</div>
 </div>
 <h5>Suplementação:</h5>
 <div class="condicoes">
-<label><input type="checkbox" id="aditil">Aditil</label>
-<label><input type="checkbox" id="Sulfafer">Sulfato Ferroso</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="aditil">
+<label class="form-check-label" for="aditil">Aditil</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="Sulfafer">
+<label class="form-check-label" for="Sulfafer">Sulfato Ferroso</label>
 </div>
 </div>
-<button onclick="avaliarPuericultura()">
-Avaliar Puericultura
-</button>
+</div>
+<button class="btn btn-primary btn-lg" onclick="avaliarPuericultura()">Avaliar Puericultura</button>
+<br><br>
 
-
-<div class="card">
+<div class="card resultadoCard">
 <h3>Resultado Puericultura</h3>
 <pre id="resultadoPueri"></pre>
 </div>
 
-<div class="card">
+<div class="card soapCard">
 <h3>SOAP Puericultura</h3>
-<textarea id="soapPueriS"></textarea>
-<button onclick="navigator.clipboard.writeText(g('soapPueriS').value)">Copiar S</button>
-<br><br><textarea id="soapPueriO"></textarea>
-<button onclick="navigator.clipboard.writeText(g('soapPueriO').value)">Copiar O</button>
-<br><br><textarea id="soapPueriA"></textarea>
-<button onclick="navigator.clipboard.writeText(g('soapPueriA').value)">Copiar A</button>
-<br><br><textarea id="soapPueriP"></textarea>
-<button onclick="navigator.clipboard.writeText(g('soapPueriP').value)">Copiar P</button>
+
+<textarea id="soapPueriS" class="form-control"></textarea>
+<div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(g('soapPueriS').value)">Copiar S</button></div>
+
+<br><br><textarea id="soapPueriO" class="form-control"></textarea>
+<div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(g('soapPueriO').value)">Copiar O</button></div>
+
+<br><br><textarea id="soapPueriA" class="form-control"></textarea>
+<div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(g('soapPueriA').value)">Copiar A</button></div>
+
+<br><br><textarea id="soapPueriP" class="form-control"></textarea>
+<div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(g('soapPueriP').value)">Copiar P</button></div>
 
 </div>
-<button onclick="limparFormulario()">Limpar tudo</button>
+<button class="btn btn-secondary btn-lg" onclick="limparFormulario()">Limpar tudo</button>
 <!--_____________________________________________________________PRE-NATAL____________________________________________________________________ -->
 
 
