@@ -2740,7 +2740,7 @@ const parou = g('parou').value;
 
 
 //-------------------------------------------------SOAP OOOOOOOOOOO------------------------------------------------------
-let soapo = `Paciente ${sexo.toLowerCase()}, ${idade} anos. 
+let soapo = `Paciente ${sexo.toLowerCase()}, ${idade} anos. IMC ${imc.toFixed(1)}.
 Medicamentos de uso contínuo: ${antiu.length ? antiu.join(", ")+ ". " : ""}Usa estatina: ${statusEST}. \n`;
 if (g('tab').checked) { soapo += `Tabagista. Com carga de "${anosmaco}" maço-ano.\n`} ;
 if (g('fumou').checked) {soapo+= `Fumou há ${parou} anos.\n`}; 
@@ -2755,36 +2755,36 @@ Pressão arterial ${pas}x${pad} mmHg.
 Exames Laboratoriais:`;
 
 if(glicJejum){
-    soapo += `\nGlicemia de jejum: ${glicJejum} mg/dL.`;
+    soapo += `Glicemia de jejum: ${glicJejum} mg/dL. `;
 }
 
 if(hba1c){
-    soapo += `\nHbA1c: ${hba1c}%.`;
+    soapo += `HbA1c: ${hba1c}%. `;
 }
 
 if (totg) {
-    soapo += `\nTOTG: ${totg} mg/dL.`;
+    soapo += `TOTG: ${totg} mg/dL. `;
 }
 
-if (glicAcaso) {soapo += `\nGlicemia ao acaso: ${glicAcaso} mg/dL.`}
+if (glicAcaso) {soapo += `Glicemia ao acaso: ${glicAcaso} mg/dL. `}
 
-if (ldl) soapo += `\nLDL ${ldl} mg/dL. `
-if (hdl) soapo+= `\nHDL ${hdl} mg/dL.`
-if (colTotal) soapo += `\nColesterol total ${colTotal} mg/dL.`
-if (tg) soapo += `\nTriglicerídeos ${tg} mg/dL.`;
+if (ldl) soapo += `LDL ${ldl} mg/dL. `
+if (hdl) soapo+= `HDL ${hdl} mg/dL. `
+if (colTotal) soapo += `Colesterol total ${colTotal} mg/dL. `
+if (tg) soapo += `Triglicerídeos ${tg} mg/dL. `;
 
-if (egfr) {    soapo += `\nTFG: ${egfr} mg/g.`;}
-if (uacr) {    soapo += `\nUACR: ${uacr} mg/g.`;}
+if (egfr) {    soapo += `TFG: ${egfr} mg/g. `;}
+if (uacr) {    soapo += `UACR: ${uacr} mg/g. `;}
 
-soapo += `\nIMC ${imc.toFixed(1)}.`;
+;
 //-------------------------------------------------SOAP AAAAAAAAAAA------------------------------------------------------
 let soapa = `${obesidade}. ${cat},`;
 
-if (statusHAS) {soapa += ` hipertensão ${statusHAS.toLowerCase()}, `;}
-if (statusHAS === "Tratada" && metaHAS) {soapa += `${metaHAS}`;}
-if (metaHAS === "fora da meta terapêutica."){soapa += ` Meta: PAS <= 130 e PAD <= 90.`}
+if (statusHAS) {soapa += ` hipertensão ${statusHAS.toLowerCase()}`;}
+if (statusHAS === "Tratada" && metaHAS) {soapa += `, ${metaHAS}`;}
+if (metaHAS === "fora da meta terapêutica."){soapa += `, Meta: PAS <= 130 e PAD <= 90.`}
 
-soapa += ` Score PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado. "}`
+soapa += `\nScore PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado. "}`
 if (temDislipidemia) {soapa += `\nDislipidemia. Risco cardiovascular ${riscoLip}. `}
 if (temDislipidemia && ldl>meta) {soapa += `Fora da meta de LDL - Meta LDL < ${meta}.\n`} ;
 if (temDislipidemia && ldl<=meta) {soapa +=`Dentro da meta de LDL\n`}
