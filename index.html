@@ -12,7 +12,7 @@
 body{
     max-width:1600px;
     margin:auto;
-    background:#f8f9fa;
+    background:#e7f4ff;
 }
 
 h1{
@@ -101,6 +101,8 @@ pre{
     font-size:14px;
     line-height:1.5;
     margin:0;
+    font-size:16px;
+    font-weight:500;
 }
 
 textarea{
@@ -449,9 +451,9 @@ História familiar de diabetes
 <div class="card soapCard">
 <h3>SOAP</h3>
 
-<textarea id="soaps" class="form-control"></textarea>
+<!--<textarea id="soaps" class="form-control"></textarea>
 <div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('soaps').value)">Copiar S</button></div>
-<br><br><textarea id="soapo" class="form-control"></textarea>
+<br><br>--><textarea id="soapo" class="form-control"></textarea>
 <div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('soapo').value)">Copiar O</button></div>
 <br><br><textarea id="soapa" class="form-control"></textarea>
 <div class="d-grid col-6 mx-auto"><button class="btn btn-success btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('soapa').value)">Copiar A</button></div>
@@ -591,16 +593,24 @@ Idade (meses)
 <input class="form-check-input" type="checkbox" role="switch" id="m4_sorri2">
 <label class="form-check-label" for="m4_sorri2">Sorri sozinho para chamar sua atenção.</label>
 </div>
-<label><input type="checkbox" id="m4_ri">Ri (ainda não uma risada completa) quando você
-tenta fazê-lo rir</label>
-<label><input type="checkbox" id="m4_olhaVoce">Olha para você, se move ou faz sons para obter ou
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_ri">
+<label class="form-check-label" for="m4_ri">Ri (ainda não uma risada completa) quando você
+tenta fazê-lo rir.</label>
+</div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_olhaVoce">
+<label class="form-check-label" for="m4_olhaVoce">Olha para você, se move ou faz sons para obter ou
 manter sua atenção</label>
+</div>
 </div>
 
 <h4>Marcos Cognitivos</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m4_fome">Se estiver com fome, abre a boca quando vê a mama
-ou a mamadeira</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_fome">
+<label class="form-check-label" for="m4_fome">Se estiver com fome, abre a boca quando vê a mama
+ou a mamadeira</label></div>
 <div class="form-check form-switch">
 <input class="form-check-input" type="checkbox" role="switch" id="m4_olhaMaos">
 <label class="form-check-label" for="m4_olhaMaos">Olha para suas mãos com interesse</label>
@@ -609,10 +619,14 @@ ou a mamadeira</label>
 
 <h4>Marcos de Movimento/Desenvolvimento Físico</h4>
 <div class="condipu">
-<label><input type="checkbox" id="m4_mantemCabeca">Mantém a cabeça firme sem apoio quando você está
-segurando-o</label>
-<label><input type="checkbox" id="m4_seguraBrinquedo">Segura um brinquedo quando você coloca na mão
-dele</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_mantemCabeca">
+<label class="form-check-label" for="m4_mantemCabeca">Mantém a cabeça firme sem apoio quando você está
+segurando-o</label></div>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_seguraBrinquedo">
+<label class="form-check-label" for="m4_seguraBrinquedo">Segura um brinquedo quando você coloca na mão
+dele</label></div>
 <div class="form-check form-switch">
 <input class="form-check-input" type="checkbox" role="switch" id="m4_usaBracos">
 <label class="form-check-label" for="m4_usaBracos">Usa os braços para balançar brinquedos</label>
@@ -621,8 +635,10 @@ dele</label>
 <input class="form-check-input" type="checkbox" role="switch" id="m4_trazMaos">
 <label class="form-check-label" for="m4_trazMaos">Traz as mãos para a boca</label>
 </div>
-<label><input type="checkbox" id="m4_empurraTronco">Empurra o tronco para cima apoiado nos cotovelos/
-antebraços quando deitado de barriga para baixo</label>
+<div class="form-check form-switch">
+<input class="form-check-input" type="checkbox" role="switch" id="m4_empurraTronco">
+<label class="form-check-label" for="m4_empurraTronco">Empurra o tronco para cima apoiado nos cotovelos/
+antebraços quando deitado de barriga para baixo</label></div>
 </div>
 
 <h4>Marcos de Linguagem/Comunicação</h4>
@@ -2278,10 +2294,17 @@ else if(imc>=25) obesidade="Sobrepeso";
 // -----------------------------------------------------
 // RASTREAMENTOS
 // -----------------------------------------------------
+const statusHAS = g('statusHAS').value;
+const glicJejum = +g('glicJejum').value || 0;
+const hba1c = +g('hba1c').value || 0;
+const totg = +g('totg').value || 0;
+const glicAcaso = +g('glicAcaso').value || 0;
+const diagnosticoDM = glicJejum >= 126 ||hba1c >= 6.5 ||totg >= 200 ||glicAcaso >= 200;
+const temDM = g('dm').checked || diagnosticoDM;
 
 let rast=[];
-if(idade>=18) rast.push("Hipertensão arterial");
-if(idade>=40 || imc>25) rast.push("Diabetes mellitus");
+if(idade>=18 && statusHAS != "Tratada") rast.push("Hipertensão arterial");
+if((idade>=40 || imc>25) && !temDM) rast.push("Diabetes mellitus");
 if((sexo=="Masculino"&&idade>=35)||(sexo=="Feminino"&&idade>=45)) rast.push("Dislipidemia");
 if(sexo=="Feminino"&&idade>=50&&idade<=74) rast.push("Mamografia");
 if(sexo=="Feminino"&&idade>=25&&idade<=65) rast.push("Câncer do colo uterino");
@@ -2289,7 +2312,7 @@ if(idade>=50&&idade<=75) rast.push("Câncer colorretal");
 if(idade>=50&&idade<=80&&(+g('anosmaco').value>=20)&&(g('tab').checked||(+g('parou').value<=15))) rast.push("Câncer de pulmão");
 if(idade>=65&&idade<=85&&g('fumou').checked) rast.push("Aneurisma de aorta abdominal");
 if((sexo=="Feminino"&&idade>=65)||(sexo=="Masculino"&&idade>=70)) rast.push("Osteoporose");
-if(g('dm').checked) rast.push("Neuropatia diabética com monofilamento, Doença renal por RAC");
+if(temDM) rast.push("Neuropatia diabética com monofilamento, Doença renal por RAC");
 
 
 // -----------------------------------------------------
@@ -2308,12 +2331,10 @@ if(cat == "Hipertensão estágio 1"||cat == "Hipertensão estágio 2"||cat == "H
 let fr=0;
 if(g('tab').checked) fr++;
 if(g('dlp').checked) fr++;
-if(g('dm').checked) fr++;
+if(temDM) fr++;
 if(imc>=30) fr++;
 if((sexo=="Masculino"&&idade>55)||(sexo=="Feminino"&&idade>65)) fr++;
 
-
-const statusHAS = g('statusHAS').value;
 let planoHAS = "";
 let nClasses = 0;
     if(g('usaDIU').checked) nClasses++;
@@ -2326,7 +2347,7 @@ if(cat !== "Pressão normal" && cat !== "Pré-hipertensão"){
     if(statusHAS !== "Tratada"){
 
         planoHAS =
-        "Iniciar monoterapia com diurético tiazídico, bloqueador de canal de cálcio, inibidor da enzima conversora da angiotensina ou bloqueador do receptor da angiotensina.\n";
+        "Introduzo monoterapia com diurético tiazídico, bloqueador de canal de cálcio, inibidor da enzima conversora da angiotensina ou bloqueador do receptor da angiotensina.";
 
     }
 
@@ -2334,24 +2355,24 @@ if(cat !== "Pressão normal" && cat !== "Pré-hipertensão"){
         
         if(nClasses === 1){
             if(g('usaIECA_BRA').checked)
-                planoHAS = "Associar bloqueador de canal de cálcio ou diurético.\n";
+                planoHAS = "Associar bloqueador de canal de cálcio ou diurético.";
             else if(g('usaBCC').checked)
-                planoHAS = "Associar IECA/BRA ou diurético.\n";
+                planoHAS = "Associar IECA/BRA ou diurético.";
             else if(g('usaDIU').checked)
-                planoHAS = "Associar IECA/BRA ou bloqueador de canal de cálcio.\n";
+                planoHAS = "Associar IECA/BRA ou bloqueador de canal de cálcio.";
         }
         else if(nClasses === 2){
             planoHAS =
-            "Considerar terapia tripla: IECA/BRA + bloqueador de canal de cálcio + diurético.\n";
+            "Introduzo terapia tripla: IECA/BRA + bloqueador de canal de cálcio + diurético.";
         }
         else if(nClasses === 3){
 
             planoHAS =
-            "Hipertensão resistente. Considerar inclusão de beta-bloqueador.\n";
+            "Hipertensão resistente. Introduzo uso de beta-bloqueador.";
         }
         else if(nClasses >= 4){
             planoHAS =
-            "Considerar inclusão de espironolactona.\n";
+            "Introduzo uso de espironolactona.";
         }
     }
 }
@@ -2359,9 +2380,9 @@ if(cat !== "Pressão normal" && cat !== "Pré-hipertensão"){
 let metaHAS = "";
 if(statusHAS === "Tratada"){
     if(pas <= 130 && pad <= 90){
-        metaHAS = "Pressão arterial dentro da meta terapêutica.";
+        metaHAS = "dentro da meta terapêutica.";
     }else{
-        metaHAS = "Pressão arterial fora da meta terapêutica.";
+        metaHAS = "fora da meta terapêutica.";
     }
 }
 // -----------------------------------------------------
@@ -2380,19 +2401,19 @@ if(g('anabol').checked) hasSec.push("Possível causa medicamentosa/hormonal");
 
 let antiu=[];
 if(g('usaDIU').checked){
- antiu.push("Usando diurético\n");
+ antiu.push("Usando diurético");
 }
 
 if(g('usaBCC').checked){
- antiu.push("Usando bloqueador de canal de cálcio\n");
+ antiu.push("Usando bloqueador de canal de cálcio");
 }
 
 if(g('usaIECA_BRA').checked){
- antiu.push("Usando IECA ou BRA\n");
+ antiu.push("Usando IECA ou BRA");
 }
 
 if(g('usaBB').checked){
- antiu.push("Usando beta-bloqueador\n");
+ antiu.push("Usando beta-bloqueador");
 }
 
 let anti=[];
@@ -2433,7 +2454,7 @@ const temDislipidemia = g('dlp').checked;
 let fatoresAltoRisco = 0;
 
 if(g('tab').checked) fatoresAltoRisco++;
-if(g('dm').checked) fatoresAltoRisco++;
+if(temDM) fatoresAltoRisco++;
 if(g('drc').checked) fatoresAltoRisco++;
 if(g('aterosub').checked) fatoresAltoRisco++;
 if(imc >= 30) fatoresAltoRisco++;
@@ -2450,7 +2471,7 @@ const dcv=g('dac').checked||g('avc').checked;
     // RISCO MUITO ALTO
     // =====================================================
 
-    if(dcv || ( g('dm').checked && fatoresAltoRisco >= 3) || g('ateromai').checked)
+    if(dcv || ( temDM && fatoresAltoRisco >= 3) || g('ateromai').checked)
     {riscoLip = "Muito alto";
         meta = 50;
         planoLip =
@@ -2461,7 +2482,7 @@ const dcv=g('dac').checked||g('avc').checked;
     // RISCO ALTO
     // =====================================================
 
-    else if(prevent >= 20 || ldl >= 190 || g('aterosub').checked || (g('dm').checked && ((fatoresAltoRisco >= 1 && fatoresAltoRisco < 3) ||((sexo == "Masculino" && idade >= 50) || (sexo == "Feminino" && idade >= 56))))
+    else if(prevent >= 20 || ldl >= 190 || g('aterosub').checked || (temDM && ((fatoresAltoRisco >= 1 && fatoresAltoRisco < 3) ||((sexo == "Masculino" && idade >= 50) || (sexo == "Feminino" && idade >= 56))))
     ){
         riscoLip = "Alto";
         meta = 70;
@@ -2475,7 +2496,7 @@ const dcv=g('dac').checked||g('avc').checked;
 
     else if(
         (prevent >= 5 && prevent < 20) ||
-        (prevent < 5 && ((ldl >= 160 && ldl < 190) || g('dm').checked || g('tab').checked || imc >= 30 || (sexo == "Masculino" && idade >= 55) || (sexo == "Feminino" && idade >= 65)))
+        (prevent < 5 && ((ldl >= 160 && ldl < 190) || temDM || g('tab').checked || imc >= 30 || (sexo == "Masculino" && idade >= 55) || (sexo == "Feminino" && idade >= 65)))
     ){  riscoLip = "Intermediário";
         meta = 100;
         planoLip =
@@ -2542,17 +2563,6 @@ if(g('ateromai').checked)
 // -----------------------------------------------------
 // DIABETES MELLITUS
 // -----------------------------------------------------
-
-const glicJejum = +g('glicJejum').value || 0;
-const hba1c = +g('hba1c').value || 0;
-const totg = +g('totg').value || 0;
-const glicAcaso = +g('glicAcaso').value || 0;
-
-const diagnosticoDM =
-    glicJejum >= 126 ||
-    hba1c >= 6.5 ||
-    totg >= 200 ||
-    glicAcaso >= 200;
     
 if(diagnosticoDM){
     g('dm').checked = true;
@@ -2572,26 +2582,18 @@ if(glicAcaso >= 200)
     criteriosDM.push("Glicemia ao acaso ≥ 200 mg/dL");
 
 let metasDM = "";
-
-const temDM =
-    g('dm').checked ||
-    diagnosticoDM;
     
 
 if(temDM){
 
     if(idade < 60){
 
-        metasDM = `HbA1c < 7,0%
-Glicemia de jejum: 80-130 mg/dL
-Glicemia pós-prandial (2h): <180 mg/dL`;
+        metasDM = `HbA1c < 7,0%, Glicemia de jejum: 80-130 mg/dL, Glicemia pós-prandial (2h): <180 mg/dL`;
 
     }
     else{
 
-        metasDM = `HbA1c < 7,5 a 8,0%
-Glicemia de jejum: 80-130 ou 90-150 mg/dL
-Glicemia pós-prandial (2h): <180 mg/dL`;
+        metasDM = `HbA1c < 7,5 a 8,0%, Glicemia de jejum: 80-130 ou 90-150 mg/dL, Glicemia pós-prandial (2h): <180 mg/dL`;
 
     }
 
@@ -2650,7 +2652,10 @@ ${rast.join(", ")}
 
 HIPERTENSÃO:
 ${cat}
-Estratificação: ${riscoLip}`;
+Estratificação: ${riscoLip}
+Anti-hipertensivos: ${antiu.length ? antiu.join(", ")+ ". " : "Nenhum."}${planoHAS} ${anti.join(", ")}
+Hipertensão Secundária: ${hasSec.length ? hasSec.join(", ") + "." : "Sem critérios informados."}
+PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado."}`;
 
 if (temDislipidemia) {
     txt += `
@@ -2658,46 +2663,25 @@ if (temDislipidemia) {
 DISLIPIDEMIA:
 Risco ${riscoLip}
 Meta LDL < ${meta}
-Tratamento: ${planoLip}`;
+Tratamento: ${planoLip}`
 }
-txt += `
-
-ANTI-HIPERTENSIVOS:
-${planoHAS}${antiu.join("")}
-${anti.join("\n")}
-
-PREVENT 10 anos:
-${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado"}
-
-HIPERTENSÃO SECUNDÁRIA:
-${hasSec.length ? hasSec.join("\n") : "Sem critérios informados"}`;
 
 if(temDM){
 
     txt += `
 
 DIABETES MELLITUS
-Critérios diagnósticos:
-${criteriosDM.join("\n")}
-
-METAS:
-${metasDM}
-
-TRATAMENTO MEDICAMENTOSO:
-${tratamentoMedicDM}`;
+Critérios diagnósticos: ${criteriosDM.join(", ")}
+Metas: ${metasDM}
+Tratamento Medicamentoso: ${tratamentoMedicDM}`
 }
-txt += `
+else {txt += `
 
 FINDRISC:
 Pontuação: ${findrisc.score}
 Risco: ${findrisc.risco}
-Probabilidade em 10 anos: ${findrisc.probabilidade};
-
-TRATAMENTO NÃO MEDICAMENTOSO:
-- Alimentação equilibrada
-- Atividade física 150 min/semana
-- Redução do estresse
-- ${imc >= 30 ? "Perda de pelo menos 5% do peso" : "Perda de 3 a 7% do peso"} ${g('tab').checked ? "\n- Cessar tabagismo" : ""}`;
+Probabilidade em 10 anos: ${findrisc.probabilidade}`
+}
 
 g('r').textContent = txt;
 // -----------------------------------------------------
@@ -2714,13 +2698,19 @@ if (g('fumou').checked) {soaps+= `Fumou há ${parou} anos. `}; if(g('anabol').ch
 
 
 //-------------------------------------------------SOAP OOOOOOOOOOO------------------------------------------------------
-let soapo = `Paciente ${sexo.toLowerCase()}, ${idade} anos.`;
+let soapo = `Paciente ${sexo.toLowerCase()}, ${idade} anos. 
+Medicamentos de uso contínuo: ${antiu.length ? antiu.join(", ")+ ". " : ""}Usa estatina: ${statusEST}. \n`;
+if (g('tab').checked) { soapo += `Tabagista. Com carga de "${anosmaco}" maço-ano.\n`} ;
+if (g('fumou').checked) {soapo+= `Fumou há ${parou} anos.\n`}; 
+if(g('anabol').checked){soapo+= `Usa anabolizantes ou hormônios.\n`}; 
+if(g('dmSintomatico').checked){soapo+= `Diabetes sintomático\n`};
 
-if (sexo == "Masculino"){soapo += `\nBom estado geral, corado, hidratado, anictérico, acianótico, orientado em tempo e espaço`;}
-else {soapo += `\nBom estado geral, corada, hidratada, anictérica, acianótica, orientada em tempo e espaço`;}
+if (sexo == "Masculino"){soapo += `Bom estado geral, corado, hidratado, anictérico, acianótico, orientado em tempo e espaço`;}
+else {soapo += `Bom estado geral, corada, hidratada, anictérica, acianótica, orientada em tempo e espaço`;}
 soapo += `\n- Ausculta cardíaca: bulhas normofonéticas em 2 tempos, sem sopros, rítmicas, regulares
 - Ausculta pulmonar: murmúrio vesicular presente bilateralmente, sem ruídos adventícios
-Pressão arterial ${pas}x${pad} mmHg.`;
+Pressão arterial ${pas}x${pad} mmHg.
+Exames Laboratoriais:`;
 
 if(glicJejum){
     soapo += `\nGlicemia de jejum: ${glicJejum} mg/dL.`;
@@ -2747,23 +2737,23 @@ if (uacr) {    soapo += `\nUACR: ${uacr} mg/g.`;}
 soapo += `\nIMC ${imc.toFixed(1)}.`;
 //-------------------------------------------------SOAP AAAAAAAAAAA------------------------------------------------------
 let soapa = `${obesidade}.
-${cat}.`;
+${cat},`;
 
-if (statusHAS) {soapa += `\nHipertensão arterial ${statusHAS.toLowerCase()}.`;}
-if (statusHAS === "Tratada" && metaHAS) {soapa += `\n${metaHAS}`;}
-if (metaHAS === "Pressão arterial fora da meta terapêutica."){soapa += `\nPAS <= 130 e PAD <= 90`}
+if (statusHAS) {soapa += ` hipertensão ${statusHAS.toLowerCase()}, `;}
+if (statusHAS === "Tratada" && metaHAS) {soapa += `${metaHAS}`;}
+if (metaHAS === "fora da meta terapêutica."){soapa += ` Meta: PAS <= 130 e PAD <= 90.`}
 
-soapa += `\nScore PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado"}`
-if (temDislipidemia) {soapa += `\nDislipidemia. Risco cardiovascular ${riscoLip}.`}
-if (temDislipidemia && ldl>meta) {soapa += `\nFora da meta de ldl \nMeta LDL < ${meta}.`} ;
-if (temDislipidemia && ldl<=meta) {soapa +=`\nDentro da meta de ldl`}
+soapa += ` Score PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado. "}`
+if (temDislipidemia) {soapa += `\nDislipidemia. Risco cardiovascular ${riscoLip}. `}
+if (temDislipidemia && ldl>meta) {soapa += `Fora da meta de LDL - Meta LDL < ${meta}.\n`} ;
+if (temDislipidemia && ldl<=meta) {soapa +=`Dentro da meta de LDL\n`}
 
-soapa += `\nRisco para diabetes tipo 2 pelo FINDRISC: ${findrisc.risco} (${findrisc.score} pontos). `
-if(temDM){soapa += `\nDiabetes mellitus.`
-if(glicJejum>130 || ((idade < 60 && hba1c > 7)||(idade>=60 && hba1c >7.5))) {soapa += `\nFora da meta de HbA1c e/ou glicemia de jejum
+if(!temDM){soapa += `Risco para diabetes tipo 2 pelo FINDRISC: ${findrisc.risco} (${findrisc.score} pontos). `}
+if(temDM){soapa += `Diabetes mellitus, `
+if(glicJejum>130 || ((idade < 60 && hba1c > 7)||(idade>=60 && hba1c >7.5))) {soapa += `fora da meta de HbA1c e/ou glicemia de jejum
 Meta HbA1c: ${idade < 60 ? "<7,0%" : "<7,5%"}.
 Meta glicemia de jejum: 80-130 mg/dL.;}`}
-if ((glicJejum<=130 && ((idade < 60 && hba1c <= 7)||(idade>=60 && hba1c <= 7.5)))){ soapa += `\nDentro da meta de HbA1c e glicemia de jejum`}
+if ((glicJejum<=130 && ((idade < 60 && hba1c <= 7)||(idade>=60 && hba1c <= 7.5)))){ soapa += `dentro da meta de HbA1c e glicemia de jejum`}
 }
 
 if(comorbidades.length){soapa += `\nCondições associadas:`;
@@ -2773,8 +2763,7 @@ if(comorbidades.length){soapa += `\nCondições associadas:`;
 }
 
 //-------------------------------------------------SOAP PPPPPPPPPPP------------------------------------------------------
-let soapp = `Orientações gerais:
-- Oriento MEV (alimentação equilibrada, atv física 150min/semana)
+let soapp = `- Oriento MEV (alimentação equilibrada, atv física 150min/semana)
 - ${imc >= 30 ? "Oriento perda de 5% do peso nos próximos 6 meses " : "Oriento perda de 3 a 7% do peso nos próximos 6 meses "} ${g('tab').checked ? "\n- Oriento sobre cessação do tabagismo e sua importância para quadro clínico" : ""}`;
 
 if(temDM){
@@ -3630,15 +3619,15 @@ if(g('aleitamento').value === "Ale"){
 }
 if(g('aleitamento').value === 'Alexclus'){
     soapAlimentacao += 
-        "Aleitamento Materno exclusivo.";
+        "Aleitamento Materno exclusivo. ";
 }
 if(g('aleitamento').value === 'Alecform'){
     soapAlimentacao += 
-        "Aleitamento Materno complementado com formula.";
+        "Aleitamento Materno complementado com formula. ";
 }
 if(g('aleitamento').value === 'Alesoform'){
     soapAlimentacao += 
-        "Aleitamento apenas com formula.";
+        "Aleitamento apenas com formula. ";
 }
 if(g('frutpapa').checked){
     soapAlimentacao +=
@@ -3744,7 +3733,7 @@ soaps += `${soapRotina}`;
 //-------------------------------------------------SOAP OOOOOOOOOOO e AAAAAAAAAAAA ------------------------------------------------------
 const polpas = +g('polpas').value || 0;
 soapo = `Puericultura ${idadeAtual.replace('m','')} meses. Peso: ${pesoPueri} kg. Altura: ${alturaPueri} cm. Perímetro Cefálico: ${pc} cm. IMC: ${(pesoPueri/(alturaPueri*alturaPueri)).toFixed(1)}. `
-if (idade<24) soapo += `Fontanela normotensa, de ${polpas} polpas digitais, sem abaulamento.`
+if (idade<24) soapo += `Fontanela normotensa, de ${polpas} polpas digitais, sem abaulamento. `
 soapo += `Ausencia de linfonodos palpaveis.
 Orofaringe sem hiperemia, ${g('erudent').checked ? "presença de erupção dentaria" : "ausencia de erupção dentaria"}.
 - Ausculta cardíaca: bulhas normofonéticas em 2 tempos, sem sopros, rítmicas, regulares.
