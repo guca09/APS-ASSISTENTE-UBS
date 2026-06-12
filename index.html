@@ -29,6 +29,15 @@ h1{
     padding:15px;
 }
 
+.dashboard{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(300px,1fr));
+
+    gap:15px;
+}
+
 .grid{
     display:grid;
     grid-template-columns:
@@ -446,7 +455,30 @@ História familiar de diabetes
 <button class="btn btn-primary btn-lg" onclick="calc()">Avaliar</button>
 <br><br>
 
-<div class="card resultadoCard"><h2>Resultado</h2><pre id="r"></pre></div>
+<div class="dashboard">
+
+    <div class="card" style="border-left:5px solid #c90000">
+        <h3>Hipertensão</h3>
+        <pre><div id="rHas"></div></pre>
+    </div>
+
+    <div class="card" style="border-left:5px solid #cad804">
+        <h3>Dislipidemia</h3>
+        <pre><div id="rDLP"></div></pre>
+    </div>
+
+    <div class="card" style="border-left:5px solid #0d00c2">
+        <h3>Diabetes</h3>
+        <pre><div id="rDM"></div></pre>
+    </div>
+
+    <div class="card" style="border-left:5px solid #da00ae">
+        <h3>Rastreamentos</h3>
+        <pre><div id="rras"></div></pre>
+    </div>
+
+</div>
+
 
 <div class="card soapCard">
 <h3>SOAP</h3>
@@ -2645,45 +2677,57 @@ const findrisc = calcFindrisc();
 // GERAÇÃO DO RESULTADO
 // -----------------------------------------------------
 
-let txt=`IMC: ${imc.toFixed(1)} (${obesidade})
+let txtras=""
+txtras+=`IMC: ${imc.toFixed(1)} (${obesidade})
 
-RASTREAMENTOS:
-${rast.join(", ")}
+- ${rast.join("\n- ")}`
 
-HIPERTENSÃO:
-${cat}
+let txtHAS=""
+
+txtHAS+=`${cat}
+
 Estratificação: ${riscoLip}
-Anti-hipertensivos: ${antiu.length ? antiu.join(", ")+ ". " : "Nenhum."}${planoHAS} ${anti.join(", ")}
+Paciente ${metaHAS}
+
+Anti-hipertensivos: ${antiu.length ? antiu.join(", ")+ ". " : "Nenhum."}
+
+Tratamento: ${planoHAS} ${anti.join(", ")}
+
 Hipertensão Secundária: ${hasSec.length ? hasSec.join(", ") + "." : "Sem critérios informados."}
+
 PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado."}`;
 
+let txtDLP=""
 if (temDislipidemia) {
-    txt += `
+    txtDLP += `Risco ${riscoLip}\n\n`
+if (temDislipidemia && ldl>meta) {txtDLP += `Paciente fora da meta de LDL\n`} ;
+if (temDislipidemia && ldl<=meta) {txtDLP +=`Paciente dentro da meta de LDL\n`}
+txtDLP +=`Meta LDL < ${meta}
 
-DISLIPIDEMIA:
-Risco ${riscoLip}
-Meta LDL < ${meta}
 Tratamento: ${planoLip}`
 }
 
+let txtDM=""
 if(temDM){
 
-    txt += `
+    txtDM += `Critérios diagnósticos: ${criteriosDM.join(", ")}
 
-DIABETES MELLITUS
-Critérios diagnósticos: ${criteriosDM.join(", ")}
 Metas: ${metasDM}
-Tratamento Medicamentoso: ${tratamentoMedicDM}`
-}
-else {txt += `
 
-FINDRISC:
+Tratamento Medicamentoso: ${tratamentoMedicDM}\n`
+if(glicJejum>130 || ((idade < 60 && hba1c > 7)||(idade>=60 && hba1c >7.5))) {txtDM += `Paciente fora da meta de HbA1c e/ou glicemia de jejum. Meta HbA1c: ${idade < 60 ? "<7,0%" : "<7,5%"}. Meta glicemia de jejum: 80-130 mg/dL.;}`}
+if ((glicJejum<=130 && ((idade < 60 && hba1c <= 7)||(idade>=60 && hba1c <= 7.5)))){ txtDM += `Paciente dentro da meta de HbA1c e glicemia de jejum`}
+}
+else {txtDM += `FINDRISC:
 Pontuação: ${findrisc.score}
 Risco: ${findrisc.risco}
 Probabilidade em 10 anos: ${findrisc.probabilidade}`
 }
 
-g('r').textContent = txt;
+g('rHas').textContent = txtHAS;
+g('rDLP').textContent = txtDLP;
+g('rDM').textContent = txtDM;
+g('rras').textContent = txtras;
 // -----------------------------------------------------
 // GERAÇÃO DO SOAP
 // -----------------------------------------------------
@@ -2693,8 +2737,8 @@ const parou = g('parou').value;
 
 
 //-------------------------------------------------SOAP SSSSSSSSSSS------------------------------------------------------
-let soaps = `${antiu.join("")}Usa estatina: ${statusEST}. `;if (g('tab').checked) { soaps += `Tabagista. Com carga de "${anosmaco}" maço-ano. `} ;
-if (g('fumou').checked) {soaps+= `Fumou há ${parou} anos. `}; if(g('anabol').checked){soaps+= `Usa anabolizantes ou hormônios. `}; if(g('dmSintomatico').checked){soaps+= `Diabetes sintomático`};
+//let soaps = `${antiu.join("")}Usa estatina: ${statusEST}. `;if (g('tab').checked) { soaps += `Tabagista. Com carga de "${anosmaco}" maço-ano. `} ;
+//if (g('fumou').checked) {soaps+= `Fumou há ${parou} anos. `}; if(g('anabol').checked){soaps+= `Usa anabolizantes ou hormônios. `}; if(g('dmSintomatico').checked){soaps+= `Diabetes sintomático`};
 
 
 //-------------------------------------------------SOAP OOOOOOOOOOO------------------------------------------------------
@@ -2736,8 +2780,7 @@ if (uacr) {    soapo += `\nUACR: ${uacr} mg/g.`;}
 
 soapo += `\nIMC ${imc.toFixed(1)}.`;
 //-------------------------------------------------SOAP AAAAAAAAAAA------------------------------------------------------
-let soapa = `${obesidade}.
-${cat},`;
+let soapa = `${obesidade}. ${cat},`;
 
 if (statusHAS) {soapa += ` hipertensão ${statusHAS.toLowerCase()}, `;}
 if (statusHAS === "Tratada" && metaHAS) {soapa += `${metaHAS}`;}
@@ -2788,7 +2831,7 @@ soapp += `\nRastreamentos indicados: ${rast.join(", ")}.`;
 
 soapp += `\nRetorno para seguimento ambulatorial.`;
 
-g('soaps').value = soaps;
+//g('soaps').value = soaps;
 g('soapo').value = soapo;
 g('soapa').value = soapa;
 g('soapp').value = soapp;}
@@ -3878,7 +3921,11 @@ function limparFormulario(){
 
         });
 
-    g('r').textContent = '';
+    g('rHas').textContent = '';
+    g('rDLP').textContent = '';
+    g('rDM').textContent = '';
+    g('rras').textContent = '';
+ //   g('soaps').value = '';
     g('soapo').value = '';
     g('soapa').value = '';
     g('soapp').value = '';
