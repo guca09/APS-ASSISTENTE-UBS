@@ -2686,10 +2686,10 @@ let txtHAS=""
 
 txtHAS+=`${cat}
 
-Estratificação: ${riscoLip}
-Paciente ${metaHAS}
+Estratificação: ${riscoLip}`
+if(metaHAS) {txtHAS+= `\nPaciente ${metaHAS}`};
 
-Anti-hipertensivos: ${antiu.length ? antiu.join(", ")+ ". " : "Nenhum."}
+txtHAS += `\n\nAnti-hipertensivos: ${antiu.length ? antiu.join(", ")+ ". " : "Nenhum."}
 
 Tratamento: ${planoHAS} ${anti.join(", ")}
 
@@ -2698,14 +2698,12 @@ Hipertensão Secundária: ${hasSec.length ? hasSec.join(", ") + "." : "Sem crit�
 PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado."}`;
 
 let txtDLP=""
-if (temDislipidemia) {
     txtDLP += `Risco ${riscoLip}\n\n`
 if (temDislipidemia && ldl>meta) {txtDLP += `Paciente fora da meta de LDL\n`} ;
 if (temDislipidemia && ldl<=meta) {txtDLP +=`Paciente dentro da meta de LDL\n`}
 txtDLP +=`Meta LDL < ${meta}
 
 Tratamento: ${planoLip}`
-}
 
 let txtDM=""
 if(temDM){
