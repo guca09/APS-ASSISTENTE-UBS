@@ -2694,18 +2694,16 @@ txtHAS += `\n\nAnti-hipertensivos: ${antiu.length ? antiu.join(", ")+ ". " : "Ne
 
 Tratamento: ${planoHAS} ${anti.join(", ")}
 
-Hipertensão Secundária: ${hasSec.length ? hasSec.join(", ") + "." : "Sem critérios informados."}
-
-PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado."}`;
+Hipertensão Secundária: ${hasSec.length ? hasSec.join(", ") + "." : "Sem critérios informados."}`;
 
 let txtDLP=""
-    txtDLP += `Risco ${riscoLip}\n\n`
+    txtDLP += `Risco ${riscoLip} - Meta LDL < ${meta}\n`
 if (temDislipidemia && ldl>meta) {txtDLP += `Paciente fora da meta de LDL\n`} ;
 if (temDislipidemia && ldl<=meta) {txtDLP +=`Paciente dentro da meta de LDL\n`}
-txtDLP +=`Meta LDL < ${meta}
+txtDLP +=`Tratamento: ${planoLip}
 
-Tratamento: ${planoLip}`
-
+PREVENT 10 anos: ${prevent !== null ? prevent.toFixed(1) + "%" : "Não calculado."}`;
+ 
 let txtDM=""
 if(temDM){
 
