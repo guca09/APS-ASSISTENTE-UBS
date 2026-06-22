@@ -2573,8 +2573,58 @@ if(g('dac').checked)
 if(g('avc').checked)
     comorbidades.push("AVC/AIT");
 
-if(g('drc').checked)
-    comorbidades.push("Doença renal crônica");
+if(g('drc').checked){
+
+    const egfr = +g('egfr').value || 0;
+    const uacr = +g('uacr').value || 0;
+
+    let classe = "";
+    let risco = "";
+
+    if(egfr >= 90) classe = "G1";
+    else if(egfr >= 60) classe = "G2";
+    else if(egfr >= 45) classe = "G3a";
+    else if(egfr >= 30) classe = "G3b";
+    else if(egfr >= 15) classe = "G4";
+    else classe = "G5";
+
+    if(uacr < 30) classe += "A1";
+    else if(uacr < 300) classe += "A2";
+    else classe += "A3";
+
+    if(
+        classe==="G1A1" ||
+        classe==="G2A1"
+    ){
+        risco = "Baixo";
+    }
+
+    else if(
+        classe==="G1A2" ||
+        classe==="G2A2" ||
+        classe==="G3aA1"
+    ){
+        risco = "Intermediário";
+    }
+
+    else if(
+        classe==="G1A3" ||
+        classe==="G2A3" ||
+        classe==="G3aA2" ||
+        classe==="G3bA1"
+    ){
+        risco = "Alto";
+    }
+
+    else{
+        risco = "Muito Alto";
+    }
+
+    comorbidades.push(
+        `Doença renal crônica (${classe} - risco ${risco})`
+    );
+
+}
 
 if(g('loa').checked)
     comorbidades.push("Lesão de órgão-alvo");
