@@ -3823,7 +3823,7 @@ soaps += `${soapRotina}`;
 
 //-------------------------------------------------SOAP OOOOOOOOOOO e AAAAAAAAAAAA ------------------------------------------------------
 const polpas = +g('polpas').value || 0;
-soapo = `Puericultura ${idadeAtual.replace('m','')} meses. Peso: ${pesoPueri} kg. Altura: ${alturaPueri} cm. Perímetro Cefálico: ${pc} cm. IMC: ${(pesoPueri/(alturaPueri*alturaPueri)).toFixed(1)}. `
+soapo = `Puericultura ${idadeAtual.replace('m','')} meses. Peso: ${pesoPueri} kg. Altura: ${alturaPueri} cm. Perímetro Cefálico: ${pc} cm. IMC: ${(pesoPueri*10000/(alturaPueri*alturaPueri)).toFixed(1)}. `
 if (idade<24) soapo += `Fontanela normotensa, de ${polpas} polpas digitais, sem abaulamento. `
 soapo += `Ausencia de linfonodos palpaveis.
 Orofaringe sem hiperemia, ${g('erudent').checked ? "presença de erupção dentaria" : "ausencia de erupção dentaria"}.
