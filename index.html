@@ -520,12 +520,16 @@ História familiar de diabetes
 <div class="grid">
     
 <div>
-Idade (meses)
-<input id="idadeMeses"
-       type="number" class="form-control"
-       min="0"
-       max="60"
-       oninput="atualizaPuericultura()">
+    Idade (Anos)
+    <input type="number" id="A" class="form-control" min="0" max="5" placeholder="0" 
+           oninput="idadeMeses.value = (this.value*12) + (M.value*1); idadeMeses.dispatchEvent(new Event('input'))">
+</div>
+<div>
+    Idade (Meses)
+    <input type="number" id="M" class="form-control" min="0" max="11" placeholder="0" 
+           oninput="idadeMeses.value = (A.value*12) + (this.value*1); idadeMeses.dispatchEvent(new Event('input'))">
+    <!-- O seu campo original fica aqui escondido, sem quebrar nada abaixo -->
+    <input id="idadeMeses" type="hidden" oninput="atualizaPuericultura()">
 </div>
 <div>Peso (kg)<input id="pesoPueri" type="number" class="form-control"></div>
 <div>Sexo<select id="sexoPueri" class="form-select" aria-label="Default select example">
