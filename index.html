@@ -3860,8 +3860,14 @@ ${soapHabitos.join(" ")}`
 
 if (alimentacaoAdequada) {soapa += `\nAlimentação adequada para a faixa etária.`}else {soapa +=`\nAlimentação possivelmente inadequada para a faixa etária, necessitando reforço de orientações alimentares. `}
 
-soapp = `Reavaliar desenvolvimento.
-Considerar acompanhamento especializado se persistência dos achados.`
+if(faltantes.length === 0){
+
+    soapp = `Desenvolvimento adequado para a idade.`
+
+}else{
+
+ soapp = `Reavaliar desenvolvimento.
+Considerar acompanhamento especializado se persistência dos achados.`}
 
 if(zPeso !== null){
 
